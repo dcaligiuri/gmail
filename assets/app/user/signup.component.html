@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                    type="text"
+                    id="email"
+                    class="form-control"
+                    [ngModel]="user?.email"
+                    name="email"
+                    required>
+        </div>
+         <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                    type="text"
+                    id="password"
+                    class="form-control"
+                    [ngModel]="user?.password"
+                    name="password"
+                    required>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+                    type="text"
+                    id="firstName"
+                    class="form-control"
+                    [ngModel]="user?.firstName"
+                    name="firstName"
+                    required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+                    type="text"
+                    id="lastName"
+                    class="form-control"
+                    [ngModel]="user?.lastName"
+                    name="lastName"
+                    required>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>

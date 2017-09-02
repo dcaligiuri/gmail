@@ -1,0 +1,8 @@
+<ul class="nav nav-pills nav-justified">
+  <li id="primary"><a id="primary" (drop)="onDrop($event)" (dragover)="allowDrop($event, data)" [routerLink]="['/mail/inbox/primary']"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Primary</a></li>
+  <li id="social"><a id="social" (drop)="onDrop($event)" (dragover)="allowDrop($event, data)"  [routerLink]="['/mail/inbox/social']"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Social</a></li>
+  <li id="promotions"><a id="promotions" (drop)="onDrop($event)" (dragover)="allowDrop($event, data)" [routerLink]="['/mail/inbox/promotions']"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Promotions</a></li>
+  <li id="updates"><a id="updates" (drop)="onDrop($event)" (dragover)="allowDrop($event, data)" [routerLink]="['/mail/inbox/updates']"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Updates</a></li>
+  <li id="forums"><a id="forums" (drop)="onDrop($event)" (dragover)="allowDrop($event, data)" [routerLink]="['/mail/inbox/forums']"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Forums</a></li>
+</ul>
+<hr>

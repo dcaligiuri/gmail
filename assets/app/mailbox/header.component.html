@@ -1,0 +1,125 @@
+<button (click)="test()"></button>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span style="color: blue;">G</span><span style="color:red;">o</span><span style="color:yellow;">o</span><span style="color:blue;">g</span><span style="color: green;">l</span><span style="color: red;">e</span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <app-autocomplete (updateSearch)="updateSearchHeader($event)"></app-autocomplete>
+        </div>
+        <button [routerLink]="['/mail/search', searchBox]" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-bell
+" aria-hidden="true"></span></a></li>
+        <button (click)="logout()">Logout</button>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="color: red;">Gmail <span class="caret"></span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <button><i class="icon-check-empty"></i> <span class="caret"></span></button>
+        <button><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
+
+<span *ngIf="onSelected()"> 
+        <button><span class="glyphicon glyphicon-download-alt" data-toggle="tooltip" title="Archive" aria-hidden="true"></span></button>
+        <button (click)="markHighlightedSpam()"><span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" title="Report Spam" aria-hidden="true"></span></button>
+        <button (click)="trashHighlightedMess()"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete" aria-hidden="true"></span></button>
+        <div class="btn-group" dropdown>
+          <button dropdownToggle type="button" class="btn dropdown-toggle">
+            <span class="glyphicon glyphicon-folder-close" data-toggle="tooltip" title="Move To" aria-hidden="true"><span class="caret"></span></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+             <div class="form-group has-feedback">
+              <label class="control-label">Move to:</label>
+              <input type="text" class="form-control"/>
+              <i class="glyphicon glyphicon-search form-control-feedback"></i>
+            </div>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('social')">Social</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('promotions')">Promotions</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('updates')">Updates</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('forums')">Forums</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a (click)="markHighlightedSpam()" class="dropdown-item" href="#">Spam</a></li>
+            <li role="menuitem"><a (click)="deleteHighlightedMess()" class="dropdown-item" href="#">Trash</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Create New</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Manage Labels</a>
+            </li>
+          </ul>
+  
+
+        </div>
+       
+        <div class="btn-group" dropdown>
+
+
+
+         <ss-multiselect-dropdown (dropdownClosed)="changeLabelHighlighted()" (click)="openDropdown()" [settings]="mySettings" [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
+
+
+        
+        </div>
+
+</span> 
+
+  <div class="btn-group" dropdown>
+    <button dropdownToggle type="button" class="btn dropdown-toggle">
+      <i class="icon-check-empty"></i>More <span class="caret"></span>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu" role="menu">
+      <li class="linkDisabled" *ngIf="!onSelected()"role="menuitem"><a (click)="markAllRead()" class="dropdown-item">Mark All As Read</a></li>
+      <li *ngIf="!onSelected()"role="menuitem"><a class="dropdown-item" href="#">Select messages to see more actions</a></li>
+      <li *ngIf="unreadSelected()" role="menuitem"><a (click)="markHighlightedRead()" class="dropdown-item">Mark as read</a></li>
+      <li *ngIf="readSelected()" role="menuitem"><a (click)="markHighlightedUnread()" class="dropdown-item">Mark as unread</a></li>
+      <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Mark as not important</a></li>
+      <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Add to Tasks</a></li>
+      <li *ngIf="onSelected()" (click)="starHighlighted()" role="menuitem"><a class="dropdown-item" href="#">Add star</a></li>
+      <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Filter messages like these</a></li>
+      <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Mute</a></li>
+    </ul>
+  </div>
+
+      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+        {{getRangeEmails()}}{{' of '}}  {{ displayCurrentComponentEmailsCount() }}
+        <button (click)="incrementDown()"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+        <button (click)="incrementUp()"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+        <li class="dropdown pull-right">
+          <button><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></button>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+

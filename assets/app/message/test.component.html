@@ -1,0 +1,51 @@
+
+
+<context-menu>
+  <ng-template [subMenu]="saySubMenu" contextMenuItem (execute)="showMessage('Hi, ' + $event.item.name)">
+    Move To Tab
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="sayHi()">
+    <span class="glyphicon glyphicon-download-alt" data-toggle="tooltip" title="Archive" aria-hidden="true"></span> Archive
+  </ng-template>
+  <ng-template contextMenuItem (execute)="showMessage('Hi, ' + $event.item.name)">
+    Mark As Unread
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="sayHi()">
+    <span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete" aria-hidden="true"></span> Delete
+  </ng-template>
+  <ng-template contextMenuItem let-item (execute)="showMessage($event.item.name + ' said: ' + $event.item.otherProperty)">
+  </ng-template>
+  <ng-template contextMenuItem passive="true">
+  </ng-template>
+</context-menu>
+
+
+<!--
+<context-menu #saySubMenu>
+    <ng-template contextMenuItem>
+      ...hi!
+    </ng-template>
+    <ng-template contextMenuItem>
+      ...hola!
+    </ng-template>
+    <ng-template contextMenuItem>
+      ...salut!
+    </ng-template>
+    </context-menu>
+-->
+
+<!---
+Move to Tab
+  Social 
+  Promotions
+  Updates 
+  Forums
+<hr>
+
+
+<hr>
+D<elete
+
+-->

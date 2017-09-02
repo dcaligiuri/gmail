@@ -1,0 +1,10 @@
+
+<app-header (passSearch)="output($event)" *ngIf="isLoggedIn()" ></app-header>
+
+<div class="col-lg-1">
+	<app-left-side *ngIf="isLoggedIn()"></app-left-side>
+</div>
+
+<div class="col-lg-11">
+	<router-outlet></router-outlet>
+</div>
