@@ -15,8 +15,6 @@ export class WriteEmailComponent {
 	constructor(private emailService: EmailService, private router: Router) {}
 
    onSubmit(form: NgForm) {
-
-     console.log(this.emailService.countInbox());
    	
      const email = new Email(form.value.body, localStorage.getItem('loggedEmail'), form.value.to, false, form.value.subject, false, "false", new Date(), ["primary"], "false");
             this.emailService.addMessage(email)

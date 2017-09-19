@@ -15,23 +15,32 @@ export class EmailService {
     public emails: Email[] = [];
     public highlightedEmails: Email[] = [];
     public upperLimit: number;
-    public lowerLimit: number; 
+    public lowerLimit: number;
 
     constructor(private http: Http, userService: UserService, private route: ActivatedRoute ) {
        
     }
 
-    public upper = new BehaviorSubject<number>(7);
+    public upper = new BehaviorSubject<number>(13);
     public lower = new BehaviorSubject<number>(0);
+    public emailThickness = new BehaviorSubject<string>('comfortable');
+    thickness$ = this.emailThickness.asObservable();
+
     upp$ = this.upper.asObservable();
     low$ = this.lower.asObservable();
     
+    changeThickness(string) {
+        this.emailThickness.next(string);
+    }
+
     changeUpp(number) {
         this.upper.next(number);
     }
     changeLow(number) {
         this.lower.next(number);
     }
+
+    
 
     moveEmail(newLocation: String, oldLocation: String){
        var highlighted = {};
@@ -49,6 +58,7 @@ export class EmailService {
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
+
 
     countInbox(){
         let unreadEmails = 0; 
@@ -71,7 +81,20 @@ export class EmailService {
     }
 
     pushHighlighted(email: Email){
-        this.highlightedEmails.push(email);
+
+        let highlighted = this.getHighlightedEmails();
+        let canAdd = true; 
+        highlighted.forEach(function (value) {
+            if (value.messageId === email.messageId){
+                canAdd = false; 
+            }
+        });
+
+
+        if (canAdd === true){
+            this.highlightedEmails.push(email);
+        }
+        
     }
 
     removeNotHighlighted(email: Email){
@@ -219,21 +242,24 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsReadHighlighted' + token, highlighted, {headers: headers});
-            //.map((response: Response) => {
-            //    const result = response;
-            //})
-            //.catch((error: Response) => Observable.throw(error.json()));
+        return this.http.post('http://localhost:3000/mail/markAsReadHighlighted' + token, highlighted, {headers: headers})
+            .map((response: Response) => {
+                const result = response;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
     }
 
 
     markUnreadHighlighted(){
+        const token = localStorage.getItem('token') ?
+        '?token=' + localStorage.getItem('token')
+        : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsUnreadHighlighted', highlighted, {headers: headers})
+        return this.http.post('http://localhost:3000/mail/markAsUnreadHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -344,7 +370,9 @@ export class EmailService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
 
-    getMessages(target: String) {
+
+
+    getMessages(target: String){
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
@@ -367,7 +395,8 @@ export class EmailService {
                         message._id
                     ));
                 }
-                if (target === 'inbox'){
+                //console.log(target);
+                if (target === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
                 //console.log(target);
@@ -381,7 +410,6 @@ export class EmailService {
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
-
 
     getMessagesForSearch(target: String) {
         const token = localStorage.getItem('token') ?

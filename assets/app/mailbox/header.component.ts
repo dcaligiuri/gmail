@@ -13,8 +13,9 @@ import { Email } from '../message/email.model';
 export class HeaderComponent {
     @Output() passSearch = new EventEmitter<string>();
     searchBox: String = "";
-    amtEmailsOnScreen: Number = 7;
-    sub: any; 
+    amtEmailsOnScreen: number = 13;
+    sub: any;
+    any: any;  
     public startInboxPos: number = 1;
     public endInboxPos: number = this.amtEmailsOnScreen - this.startInboxPos + 1; 
 	optionsModel: number[] = []
@@ -30,28 +31,37 @@ export class HeaderComponent {
 	constructor(private activatedRoute: ActivatedRoute, private router: Router, private emailService: EmailService) {}
 
     ngOnInit(){
+
+        console.log(this.startInboxPos);
+        console.log(this.endInboxPos);
+
         this.myOptions = [
             { id: 1, name: 'Updates' },
             { id: 2, name: 'Social' },
             { id: 3, name: 'Promotions' },
             { id: 4, name: 'Forums' },
         ];
+
         this.sub = this.router.events.subscribe(params => {
             this.startInboxPos = 1;
-            this.endInboxPos = 7;
+            this.endInboxPos = this.amtEmailsOnScreen;
             this.emailService.changeLow(this.startInboxPos);
             this.emailService.changeUpp(this.endInboxPos);
         });
 
+
+        this.any = this.activatedRoute.url.subscribe(params => {
+            console.log(params);
+        });
+        
     }
 
-    test(){
-        console.log(this.emailService.emails);
+
+
+    changeThickness(event: any, thickness: string){
+        this.emailService.changeThickness(thickness);
     }
 
-    hello(){
-        console.log(this.startInboxPos);
-    }
 
     openDropdown(){    
         let countSocial = 0; 
@@ -114,26 +124,25 @@ export class HeaderComponent {
         this.searchBox = event; 
     }
 
-    getLimit(){
-        return this.amtEmailsOnScreen;
-    }
+    //getLimit(){
+    //    return this.amtEmailsOnScreen;
+    //}
 
-    getSkip(){
-        if (this.startInboxPos = 1){
-            return 0;
-        }
-        else {
-            return this.amtEmailsOnScreen + this.startInboxPos;
-        }
-    }
+    //getSkip(){
+       /// if (this.startInboxPos = 1){
+      //      return 0;
+      ///  }
+      //  else {
+      //      return this.amtEmailsOnScreen + this.startInboxPos;
+     //   }
+    ///}
 
     incrementUp(){
-        if (this.startInboxPos + 7 <= this.emailService.countCurrentComponentEmails()){
-
-        this.startInboxPos = this.startInboxPos + 7;
-        this.endInboxPos = this.endInboxPos + 7;
-        this.emailService.changeLow(this.startInboxPos);
-        this.emailService.changeUpp(this.endInboxPos);
+        if (this.startInboxPos + this.amtEmailsOnScreen <= this.emailService.countCurrentComponentEmails()){
+            this.startInboxPos = this.startInboxPos + this.amtEmailsOnScreen;
+            this.endInboxPos = this.endInboxPos + this.amtEmailsOnScreen;
+            this.emailService.changeLow(this.startInboxPos);
+            this.emailService.changeUpp(this.endInboxPos);
 
 
         }
@@ -143,8 +152,8 @@ export class HeaderComponent {
 
     incrementDown(){
         if (this.startInboxPos > 1){
-            this.startInboxPos = this.startInboxPos - 7; 
-            this.endInboxPos = this.endInboxPos - 7; 
+            this.startInboxPos = this.startInboxPos - this.amtEmailsOnScreen; 
+            this.endInboxPos = this.endInboxPos - this.amtEmailsOnScreen; 
             this.emailService.changeLow(this.startInboxPos);
             this.emailService.changeUpp(this.endInboxPos);
         }
@@ -155,6 +164,8 @@ export class HeaderComponent {
     }
 
     markAllRead(){
+        //MAKE SURE THIS ONLY MARKS ALL READ IN CURRENT COMPONENT,
+        //NOT ALLL THE EMAILS 
         this.emailService.markAllRead().subscribe(
                 data => {
                     },
@@ -170,31 +181,17 @@ export class HeaderComponent {
                 error => console.error(error)
            );
     }
+
+
+
     
     trashHighlightedMess(){
-    	this.emailService.trashHighlightedEmails().subscribe(
-    			data => {
-                    },
-                    error => console.error(error)
-            );
-    }
-
-
-    markHighlightedRead(){
-        this.emailService.markReadHighlighted().subscribe(
-                data => {
-                    },
-                    error => console.error(error)
-            );
-        this.emailService.getMessages('inbox').subscribe(
-                        (messages: Email[]) => {
-                            this.emailService.emails = messages;
-                        }
-                    );
+    	this.emailService.trashHighlightedEmails().subscribe();
+        this.emailService.getMessages('primary').subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
-
+    
     markHighlightedSpam(){
         console.log("YOU HAVE CLICKED REPORT SPAM");
         this.emailService.markSpamHighlighted().subscribe(
@@ -213,13 +210,19 @@ export class HeaderComponent {
     }
 
 
-    markHighlightedUnread(){
-        this.emailService.markUnreadHighlighted().subscribe(
-                data => {
 
-                    },
-                    error => console.error(error)
-            );
+    markHighlightedRead(){
+
+        this.emailService.markReadHighlighted().subscribe();
+        this.emailService.getMessages('primary').subscribe();
+        this.emailService.clearHighlightedEmails();
+    }
+
+
+    markHighlightedUnread(){
+        this.emailService.markUnreadHighlighted().subscribe();
+        this.emailService.getMessages('primary').subscribe();
+        this.emailService.clearHighlightedEmails();
     }
 
     starHighlighted(){

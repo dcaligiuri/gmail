@@ -27,12 +27,6 @@ export class LeftSideComponent {
         }
     }
 
-
-    test(){
-        console.log(this.emailService.countInbox());
-    }
-
-
     displayInboxCount(){
       return this.emailService.countInbox();
     }

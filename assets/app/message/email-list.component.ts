@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { Email } from './email.model';
 import { EmailService } from './email.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { AutocompleteComponent } from "./autocomplete.component";
 import { HeaderComponent } from "../mailbox/header.component";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -24,22 +24,19 @@ export class EmailListComponent {
 
 public messages: Email[];
 public isStarred: String;
-emailId: String; 
-id: String; 
 public upper: number;
 public lower: number; 
 public searchTerm: string;
 private subscription: any;    
 private subscriptionLow: any; 
 private sub: any;
-private la: any; 
+private subUrls: any; 
+public currentPath: string;
 
     constructor(private header: HeaderComponent, private emailService: EmailService, private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit() {
-        //this.header.startInboxPos = 1; 
-        //this.emailService.changeLow(1);
-        //this.emailService.lowerLimit = 1; 
+
         this.sub = this.route.params.subscribe(params => {
         this.searchTerm = params['searchTerm']; 
         this.emailService.searchMessages(this.searchTerm)
@@ -49,20 +46,22 @@ private la: any;
                         }
                     );
         this.subscription = this.emailService.upp$
-            .subscribe(item => this.upper = item)
+            .subscribe(item => this.upper = item);
         this.subscriptionLow = this.emailService.low$
-            .subscribe(item => this.lower = item)
+            .subscribe(item => this.lower = item);
+
+
+        this.subUrls = this.route.url.subscribe(urlsegs => {
+            this.chooseEmailList(urlsegs);
+        });
+
     });
 
-  
-        if (this.route.url.value[1].path === 'starred'){
-             this.emailService.getMessages('starred')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
-        }
+
+
+      /*
+
+
         else if (this.route.url.value[1].path === 'search'){
                 var searchTerm = this.route.url.value[2].path;
                 this.emailService.searchMessages(searchTerm)
@@ -73,7 +72,118 @@ private la: any;
                     );
         }
 
-        else if (this.route.url.value[1].path === 'inbox'){
+
+
+
+
+
+
+
+
+
+
+
+        else if (this.route.url.value[1].path === 'sent'){
+             this.emailService.getMessages('sent')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
+        }
+        else if (this.route.url.value[1].path === 'spam'){
+             this.emailService.getMessages('spam')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
+        }
+        else if (this.route.url.value[1].path === 'trash'){
+             this.emailService.getMessages('trash')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
+        }
+        else if (this.route.url.value[1].path === 'all'){
+             this.emailService.getMessages('all')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
+        }
+
+        */
+
+
+    }
+
+    displayInboxHeader(){
+        if(this.route.url.value[1].path === 'inbox'){
+            return true; 
+        }
+    }
+
+
+    getStuff(){
+        return this.emailService.emails;
+    }
+
+
+    public chooseEmailList(urlseg: UrlSegment[]){
+        if (urlseg[1].path === 'inbox'){
+                this.emailService.getMessages(urlseg[2].path)
+                .subscribe(
+                    (messages: Email[]) => {
+                        this.messages = messages;
+                    }
+                ); 
+            }
+            else if(urlseg[1].path === 'starred'){
+                this.emailService.getMessages('starred')
+                    .subscribe(
+                        (messages: Email[]) => {
+                            this.messages = messages;
+                        }
+                    );
+
+            }
+            else if(urlseg[1].path === 'search'){
+                let searchTerm = urlseg[2].path
+                this.emailService.getMessages('starred')
+                    .subscribe(
+                        (messages: Email[]) => {
+                            this.messages = messages;
+                        }
+                    );
+
+            }
+            else{
+                this.emailService.getMessages(urlseg[1].path)
+                    .subscribe(
+                        (messages: Email[]) => {
+                            this.messages = messages;
+                        }
+                    );
+            }
+
+    }
+
+     
+
+
+    }
+
+
+   
+
+   /*
+
+
+              else if (this.route.url.value[1].path === 'inbox'){
             if (this.route.url.value[2].path === 'primary') {
                 this.emailService.getMessages('inbox')
                     .subscribe(
@@ -115,32 +225,9 @@ private la: any;
                     );
             }
         }
-        else if (this.route.url.value[1].path === 'sent'){
-             this.emailService.getMessages('sent')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
-        }
-        else if (this.route.url.value[1].path === 'spam'){
-             this.emailService.getMessages('spam')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
-        }
-        else if (this.route.url.value[1].path === 'trash'){
-             this.emailService.getMessages('trash')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
-        }
-        else if (this.route.url.value[1].path === 'all'){
-             this.emailService.getMessages('all')
+  
+        if (this.route.url.value[1].path === 'starred'){
+             this.emailService.getMessages('starred')
             .subscribe(
                 (messages: Email[]) => {
                     this.messages = messages;
@@ -148,16 +235,5 @@ private la: any;
             );
         }
 
-    }
-
-
-    displayInboxHeader(){
-        if(this.route.url.value[1].path === 'inbox'){
-            return true; 
-        }
-    }
-
-
-    
-}
+        */
 

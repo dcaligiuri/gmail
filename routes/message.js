@@ -70,7 +70,7 @@ router.get('/search/:searchTerm', function (req, res, next) {
 });
 
 
-router.get('/inbox', function (req, res, next) {
+router.get('/primary', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
         .populate('user', 'firstName')
@@ -365,9 +365,12 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
         Email.find({ _id: req.body[key] }).update({"read": true}).exec();
     }
 
-    console.log(req.query.token);
+    
+
+    /*
 
     var decoded = jwt.decode(req.query.token);
+
     Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -377,11 +380,14 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
                     error: err
                 });
             }
+            console.log(messages);
             res.status(200).json({
                 message: 'Success',
                 obj: messages
             });
         });
+
+    */
         
 });
 

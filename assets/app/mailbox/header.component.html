@@ -1,5 +1,3 @@
-<button (click)="test()"></button>
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -108,15 +106,39 @@
   </div>
 
       </ul>
-     
+
+      
+
       <ul class="nav navbar-nav navbar-right">
         {{getRangeEmails()}}{{' of '}}  {{ displayCurrentComponentEmailsCount() }}
         <button (click)="incrementDown()"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
         <button (click)="incrementUp()"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+
+
+
+
         <li class="dropdown pull-right">
-          <button><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></button>
+
+          <div class="dropdown">
+            <button class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a (click)="changeThickness($event,'comfortable')">Comfortable</a></li>
+              <li><a (click)="changeThickness($event,'cozy')">Cozy</a></li>
+              <li><a (click)="changeThickness($event,'compact')">Compact</a></li>
+            </ul>
+          </div>
+
         </li>
       </ul>
+
+
+
+
+
+
+
+
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Email } from './email.model';
 import { EmailService } from './email.service';
 
@@ -10,24 +10,68 @@ import { EmailService } from './email.service';
     	.btn:focus { outline: none; }
         .glyphicon-star { color: gold;}
         .read-email { background-color: #F0F8FF;}
-        .highlighted { background-color: #ffff99;} 
+        .highlighted { background-color: #ffff99 !important;} 
+        .comfortable { height:5vh; }
+        .cozy { height: 4vh; }
+        .compact { height: 3vh; }
     `
     ]
    
 })
 
-export class EmailComponent {
+export class EmailComponent implements OnInit {
+
+    //div {  height:3vh;}
 showDropdown = false; 
 
+emailThickness: string; 
 @Input() message: Email;
 @Input() isStarred: string;
 @Input() messageId: string;
-@Output() isChecked: Boolean;
+@Input() isChecked: Boolean;
 @Input() isRead: string;
 @Input() timeStamp: string;
+subscription: any; 
+//@Input() beast: string; 
 
     constructor(private emailService: EmailService) {
+
     }
+
+    ngOnInit(){
+
+
+        this.subscription = this.emailService.thickness$
+            .subscribe(serviceThickness => this.emailThickness = serviceThickness);
+
+        //this.emailThickness = 'comfortable'; 
+
+        //console.log(this.message.messageId);
+        //console.log(this.emailService.getHighlightedEmails());
+
+
+        ///let highlighted = this.emailService.getHighlightedEmails();
+       //highlighted.forEach(function (value) {
+         //  if (value.messageId === this.message.messageId){
+        //        this.checked = true; 
+        //   }
+      // });
+
+
+       // if (this.checkHighlighted()){
+       ///     console.log("IN HIGHLIGHTED");
+        ///}
+        //loop through by ids and compare to ids in this.message to highlighted
+    }
+
+    //lookForChecked(){
+      //   let highlighted = this.emailService.getHighlightedEmails();
+    ///       highlighted.forEach(function (value) {
+    //       if (value.messageId == this.messageId){
+   ///             this.checked = true; 
+   //        }
+   //    });
+   /// }
 
 
     onDragStart(event: any, email: Email) {
