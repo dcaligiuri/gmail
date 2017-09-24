@@ -6,8 +6,7 @@ import { Email } from '../message/email.model';
 
 @Component({
 	selector: 'app-header',
-	templateUrl: './header.component.html',
-
+	templateUrl: './header.component.html'
 })
 
 export class HeaderComponent {
@@ -32,8 +31,8 @@ export class HeaderComponent {
 
     ngOnInit(){
 
-        console.log(this.startInboxPos);
-        console.log(this.endInboxPos);
+        //console.log(this.startInboxPos);
+        //console.log(this.endInboxPos);
 
         this.myOptions = [
             { id: 1, name: 'Updates' },
@@ -164,30 +163,28 @@ export class HeaderComponent {
     }
 
     markAllRead(){
-        //MAKE SURE THIS ONLY MARKS ALL READ IN CURRENT COMPONENT,
-        //NOT ALLL THE EMAILS 
-        this.emailService.markAllRead().subscribe(
-                data => {
-                    },
-                    error => console.error(error)
-            );
+        let currTab = this.emailService.getCurrentTab();
+        this.emailService.markAllRead().subscribe();
+        this.emailService.getMessages(currTab).subscribe();
+        this.emailService.clearHighlightedEmails();
+        
     }
 
     moveTo(placeToMove: string){
+        let currTab = this.emailService.getCurrentTab();
         let originalLocation = this.activatedRoute.snapshot.firstChild.url[2].path 
-        this.emailService.moveEmail(placeToMove, originalLocation).subscribe(
-                data => {
-                    },
-                error => console.error(error)
-           );
+        this.emailService.moveEmail(placeToMove, originalLocation).subscribe();
+        this.emailService.getMessages(currTab).subscribe();
+        this.emailService.clearHighlightedEmails();
     }
 
 
 
     
     trashHighlightedMess(){
+        let currTab = this.emailService.getCurrentTab();
     	this.emailService.trashHighlightedEmails().subscribe();
-        this.emailService.getMessages('primary').subscribe();
+        this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
@@ -212,26 +209,25 @@ export class HeaderComponent {
 
 
     markHighlightedRead(){
-
+        let currTab = this.emailService.getCurrentTab();
         this.emailService.markReadHighlighted().subscribe();
-        this.emailService.getMessages('primary').subscribe();
+        this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
 
     markHighlightedUnread(){
+        let currTab = this.emailService.getCurrentTab();
         this.emailService.markUnreadHighlighted().subscribe();
-        this.emailService.getMessages('primary').subscribe();
+        this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
     starHighlighted(){
-        this.emailService.starHighlightedEmails().subscribe(
-                data => {
-
-                    },
-                    error => console.error(error)
-            );
+        let currTab = this.emailService.getCurrentTab();
+        this.emailService.starHighlightedEmails().subscribe();
+        this.emailService.getMessages(currTab).subscribe();
+        this.emailService.clearHighlightedEmails();
     }
 
     onSelected(){

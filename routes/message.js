@@ -28,6 +28,11 @@ router.post('/moveEmail', function (req, res, next) {
     for (var key in req.body) {
         Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
     }
+
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
 });
 
 
@@ -327,6 +332,12 @@ router.post('/changeLabelHighlighted', function (req, res, next) {
        }
     }
 
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+
+
 });
 
 
@@ -337,6 +348,21 @@ router.post('/trashHighlighted', function (req, res, next) {
         Email.find({ _id: req.body[key] }).update({"trash": "true"}).exec();
     }
 
+    var decoded = jwt.decode(req.query.token);
+    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+        });
 });
 
 
@@ -347,6 +373,12 @@ router.post('/deleteHighlighted', function (req, res, next) {
         Email.find({ _id: req.body[key] }).remove().exec();
     }
 
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+
+
 });
 
 router.post('/starHighlighted', function (req, res, next) {
@@ -354,6 +386,12 @@ router.post('/starHighlighted', function (req, res, next) {
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"starred": true}).exec();
     }
+
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+
         
 });
 
@@ -365,30 +403,11 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
         Email.find({ _id: req.body[key] }).update({"read": true}).exec();
     }
 
-    
-
-    /*
-
-    var decoded = jwt.decode(req.query.token);
-
-    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
-        .populate('user', 'firstName')
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            console.log(messages);
-            res.status(200).json({
+    res.status(200).json({
                 message: 'Success',
                 obj: messages
             });
-        });
-
-    */
-        
+    
 });
 
 
@@ -416,6 +435,12 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"read": false}).exec();
     }
+
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+
         
 });
 
@@ -424,6 +449,12 @@ router.post('/markAsSpamHighlighted', function (req, res, next) {
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"spam": "true"}).exec();
     }
+
+
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
         
 });
 
@@ -432,6 +463,12 @@ router.post('/markAsNotSpamHighlighted', function (req, res, next) {
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"spam": "false"}).exec();
     }
+
+    res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+    
         
 });
 

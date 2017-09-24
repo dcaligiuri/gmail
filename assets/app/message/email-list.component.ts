@@ -1,9 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Email } from './email.model';
 import { EmailService } from './email.service';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { AutocompleteComponent } from "./autocomplete.component";
-import { HeaderComponent } from "../mailbox/header.component";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
@@ -14,13 +13,12 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
         .btn:focus {outline: none;}
         li {color: blue;}
     `
-    ],
-    providers: [HeaderComponent]
+    ]
    
 })
 
 
-export class EmailListComponent {
+export class EmailListComponent implements OnInit {
 
 public messages: Email[];
 public isStarred: String;
@@ -33,7 +31,7 @@ private sub: any;
 private subUrls: any; 
 public currentPath: string;
 
-    constructor(private header: HeaderComponent, private emailService: EmailService, private router: Router, private route: ActivatedRoute) {}
+    constructor(private emailService: EmailService, private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit() {
 
@@ -50,8 +48,8 @@ public currentPath: string;
         this.subscriptionLow = this.emailService.low$
             .subscribe(item => this.lower = item);
 
-
         this.subUrls = this.route.url.subscribe(urlsegs => {
+            this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
             this.chooseEmailList(urlsegs);
         });
 
@@ -133,7 +131,7 @@ public currentPath: string;
     }
 
 
-    public chooseEmailList(urlseg: UrlSegment[]){
+    chooseEmailList(urlseg: UrlSegment[]){
         if (urlseg[1].path === 'inbox'){
                 this.emailService.getMessages(urlseg[2].path)
                 .subscribe(
@@ -168,6 +166,30 @@ public currentPath: string;
                             this.messages = messages;
                         }
                     );
+            }
+
+    }
+
+
+    retCurrTab(urlseg: UrlSegment[]){
+        if (urlseg[1].path === 'inbox'){
+                return urlseg[2].path;
+            }
+            else if(urlseg[1].path === 'starred'){
+                return urlseg[1].path;
+            }
+            else if(urlseg[1].path === 'search'){
+                //let searchTerm = urlseg[2].path
+                //this.emailService.getMessages('starred')
+                 //   .subscribe(
+                //        (messages: Email[]) => {
+                 //           this.messages = messages;
+                 //       }
+                 //   );
+
+            }
+            else{
+                return urlseg[1].path;
             }
 
     }

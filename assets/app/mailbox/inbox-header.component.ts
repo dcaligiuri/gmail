@@ -15,7 +15,9 @@ export class InboxHeaderComponent {
 
 	moveTo(placeToMove: string){
         let originalLocation = this.activatedRoute.snapshot.url[2].path;
+        let currTab = this.emailService.getCurrentTab();
         this.emailService.moveEmail(placeToMove, originalLocation).subscribe();
+        this.emailService.getMessages(currTab).subscribe();
     }
 
 	onDrop(event: any, data: any){

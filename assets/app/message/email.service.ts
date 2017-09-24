@@ -11,8 +11,9 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class EmailService {
-    public unreadEmails: Email[] = [];
+    public currentTab = ""; 
     public emails: Email[] = [];
+    public unreadEmails: Email[] = [];
     public highlightedEmails: Email[] = [];
     public upperLimit: number;
     public lowerLimit: number;
@@ -24,13 +25,22 @@ export class EmailService {
     public upper = new BehaviorSubject<number>(13);
     public lower = new BehaviorSubject<number>(0);
     public emailThickness = new BehaviorSubject<string>('comfortable');
-    thickness$ = this.emailThickness.asObservable();
 
+    
+    thickness$ = this.emailThickness.asObservable();
     upp$ = this.upper.asObservable();
     low$ = this.lower.asObservable();
     
     changeThickness(string) {
         this.emailThickness.next(string);
+    }
+
+    setCurrentTab(currPath: string){
+        this.currentTab = currPath;
+    }
+
+    getCurrentTab(){
+        return this.currentTab;
     }
 
     changeUpp(number) {
@@ -81,7 +91,7 @@ export class EmailService {
     }
 
     pushHighlighted(email: Email){
-
+        
         let highlighted = this.getHighlightedEmails();
         let canAdd = true; 
         highlighted.forEach(function (value) {
@@ -192,14 +202,34 @@ export class EmailService {
     }
 
     trashHighlightedEmails(){
+        const token = localStorage.getItem('token') ?
+        '?token=' + localStorage.getItem('token')
+        : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/trashHighlighted', highlighted, {headers: headers})
+        return this.http.post('http://localhost:3000/mail/trashHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
-                const result = response;
+                const messages = response.json().obj;
+                let transformedMessages: Email[] = [];
+                for (let message of messages) {
+                    transformedMessages.push(new Email(
+                        message.content,
+                        message.fromEmail,
+                        message.toEmail,
+                        message.starred,
+                        message.subject,
+                        message.read,
+                        message.spam,
+                        message.timeStamp,
+                        message.labels,
+                        message.trash,
+                        message._id
+                    ));
+                }
+                this.emails = transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -371,7 +401,7 @@ export class EmailService {
     }
 
 
-
+    /*
     getMessages(target: String){
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
@@ -407,6 +437,41 @@ export class EmailService {
                     //console.log(transformedMessages);
                 //}
                 return transformedMessages.reverse();
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
+    }
+
+    */
+
+
+
+    getMessages(target: String){
+        const token = localStorage.getItem('token') ?
+        '?token=' + localStorage.getItem('token')
+        : '';
+        return this.http.get('http://localhost:3000/mail/' + target + token)
+            .map((response: Response) => {
+                const messages = response.json().obj;
+                let transformedMessages: Email[] = [];
+                for (let message of messages) {
+                    transformedMessages.push(new Email(
+                        message.content,
+                        message.fromEmail,
+                        message.toEmail,
+                        message.starred,
+                        message.subject,
+                        message.read,
+                        message.spam,
+                        message.timeStamp,
+                        message.labels,
+                        message.trash,
+                        message._id
+                    ));
+                }
+                this.emails = transformedMessages.reverse();
+                if (target === 'primary'){
+                    this.unreadEmails = transformedMessages.reverse().reverse();
+                }
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
