@@ -10,7 +10,7 @@ var userRoutes = require('./routes/user');
 var appRoutes = require('./routes/app');
 
 var app = express();
-mongoose.connect('localhost:27017/gmail' || process.env.MONGOLAB_URI );
+mongoose.connect('localhost:27017/gmail' || process.env.MONGOLAB_OLIVE_URI );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
