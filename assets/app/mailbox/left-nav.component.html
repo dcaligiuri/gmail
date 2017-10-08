@@ -1,17 +1,20 @@
 <button [routerLink]="['mail/compose']" class="btn btn-danger"><a style="color:white;" (click)="clearHighlighted()">Compose</a></button>
-<a><p class="text-center" [routerLink]="['mail/inbox/primary']" (click)="clearHighlighted()">Inbox ({{ displayInboxCount() }})</p></a>
-<a><p class="text-center" [routerLink]="['mail/starred']" (click)="clearHighlighted()">Starred</p></a>
-<a><p class="text-center" [routerLink]="['mail/sent']" (click)="clearHighlighted()">Sent Mail</p></a>
+<a (click)="clearHighlighted()" [routerLink]="['mail/inbox/primary']"><p class="text-center">Inbox ({{ displayInboxCount() }})</p></a>
+<a [routerLink]="['mail/starred']" (click)="clearHighlighted()"><p class="text-center">Starred</p></a>
+<a [routerLink]="['mail/sent']" (click)="clearHighlighted()"><p class="text-center" >Sent Mail</p></a>
 <a><p class="text-center">Drafts</p></a>
 
 <a (click)="lessMoreDrop()"><p class="text-center">More<span class="caret"></span></a>
 <hr>
-<div *ngIf="showHide" >
-	<a><p class="text-center">Important</p></a>
-	<a><p class="text-center">Chats</p></a>
-	<a><p class="text-center" [routerLink]="['mail/all']">All Mail</p></a>
-	<a><p class="text-center" [routerLink]="['mail/spam']">Spam</p></a>
-	<a><p class="text-center" [routerLink]="['mail/trash']">Trash</p></a>
+
+<div *ngIf="showHide" style="text-align:center">
+	<ul> 
+		<li><a [routerLink]="['mail/all']">Important</a></li>
+		<li><a [routerLink]="['mail/all']">Chats</a></li>
+		<li><a [routerLink]="['mail/all']">All Mail</a></li>
+		<li><a [routerLink]="['mail/spam']">Spam</a></li>
+		<li><a [routerLink]="['mail/trash']">Trash</a></li>
+	</ul>
 </div>
 
 

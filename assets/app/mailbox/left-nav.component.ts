@@ -6,7 +6,15 @@ import { Email } from '../message/email.model';
 @Component({
 	selector: 'app-left-side',
 	templateUrl: './left-nav.component.html',
-	
+	styles: [
+    `
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    `
+    ]
 })
 
 
