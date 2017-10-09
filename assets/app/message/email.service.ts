@@ -62,7 +62,7 @@ export class EmailService {
             highlighted[this.highlightedEmails[index].messageId] = tempArrPosistion;
        }
        const headers = new Headers({'Content-Type': 'application/json'});
-       return this.http.post('http://localhost:3000/mail/moveEmail', highlighted, {headers: headers})
+       return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail', highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -150,7 +150,7 @@ export class EmailService {
         : '';
         const body = {};
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAllRead' + token, body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAllRead' + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -163,7 +163,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsNotSpamHighlighted', highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsNotSpamHighlighted', highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -176,7 +176,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsSpamHighlighted', highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsSpamHighlighted', highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -210,7 +210,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/trashHighlighted' + token, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/trashHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -241,7 +241,7 @@ export class EmailService {
             highlighted['labels'] = newLabels;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/changeLabelHighlighted', highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/changeLabelHighlighted', highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -255,7 +255,7 @@ export class EmailService {
             //remove from highlighted array upon deletion
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/starHighlighted', highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/starHighlighted', highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -272,7 +272,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsReadHighlighted' + token, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -289,7 +289,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/markAsUnreadHighlighted' + token, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -301,7 +301,7 @@ export class EmailService {
         '?token=' + localStorage.getItem('token')
         : '';
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/compose' + token, email, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/compose' + token, email, {headers: headers})
             .map((response: Response) => {
                 const result = response.json();
             })
@@ -309,7 +309,7 @@ export class EmailService {
     }
 
     readMessage(messageId: String){
-       return this.http.get(`http://localhost:3000/mail/${messageId}`)
+       return this.http.get(`https://dansgmail.herokuapp.com/mail/${messageId}`)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
@@ -321,7 +321,7 @@ export class EmailService {
     markAsRead(messageId: String){
         const body = {"messageId": messageId}
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/mark', body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/mark', body, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -332,7 +332,7 @@ export class EmailService {
     applyStar(messageId: String) {
         const body = {"messageId": messageId}
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/inbox/star', body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/inbox/star', body, {headers: headers})
             .map((response: Response) => {
                 const result = response;
             })
@@ -342,7 +342,7 @@ export class EmailService {
      removeStar(messageId: String) {
         const body = {"messageId": messageId}
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/mail/inbox/unstar', body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/inbox/unstar', body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
             })
@@ -353,7 +353,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get('http://localhost:3000/mail/countSpam' + token)
+        return this.http.get('https://dansgmail.herokuapp.com/mail/countSpam' + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 return messages.length;
@@ -376,7 +376,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get(`http://localhost:3000/mail/search/${searchFor}` + token)
+        return this.http.get(`https://dansgmail.herokuapp.com/mail/search/${searchFor}` + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -406,7 +406,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get('http://localhost:3000/mail/' + target + token)
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -449,7 +449,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get('http://localhost:3000/mail/' + target + token)
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -480,7 +480,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get('http://localhost:3000/mail/' + target + token)
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -509,7 +509,7 @@ export class EmailService {
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
-        return this.http.get('http://localhost:3000/mail/' + target + token)
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];

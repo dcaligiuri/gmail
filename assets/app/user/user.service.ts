@@ -15,7 +15,7 @@ export class UserService {
     submitLogin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/user/login', body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/user/login', body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -23,7 +23,7 @@ export class UserService {
 
     sayHi(email: String) {
        let email = '?email=' + email;
-       return this.http.get('http://localhost:3000/user/sayHi' +  email)
+       return this.http.get('https://dansgmail.herokuapp.com/user/sayHi' +  email)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -37,7 +37,7 @@ export class UserService {
 
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/user/signup', body, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/user/signup', body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
