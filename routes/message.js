@@ -332,9 +332,8 @@ router.post('/changeLabelHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+        message: 'Success'
+    });
 
 
 });
@@ -373,9 +372,8 @@ router.post('/deleteHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+        message: 'Success'
+    });
 
 
 });
@@ -387,9 +385,8 @@ router.post('/starHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+        message: 'Success'
+    });
 
         
 });
@@ -403,10 +400,9 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-    
+        message: 'Success'
+    });
+
 });
 
 
@@ -436,10 +432,8 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-
+        message: 'Success'
+    });
         
 });
 
@@ -451,9 +445,8 @@ router.post('/markAsSpamHighlighted', function (req, res, next) {
 
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+        message: 'Success'
+    });
         
 });
 
@@ -464,11 +457,9 @@ router.post('/markAsNotSpamHighlighted', function (req, res, next) {
     }
 
     res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+        message: 'Success'
+    });
     
-        
 });
 
 
