@@ -11,7 +11,7 @@ var appRoutes = require('./routes/app');
 
 var app = express();
 //mongoose.connect('localhost:27017/gmail' || 'mongodb://<dcal>:<password11>@ds013475.mlab.com:13475/heroku_jn9cgpcs');
-mongoose.connect('mongodb://<dcal>:<password11>@ds013475.mlab.com:13475/heroku_jn9cgpcs');
+mongoose.connect('mongodb://<heroku_jn9cgpcs>:<password11>@ds013475.mlab.com:13475/heroku_jn9cgpcs');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
