@@ -35,7 +35,7 @@ user: User;
                         localStorage.setItem('loggedEmail', data.loggedEmail);
                         localStorage.setItem('userFirstName', data.firstName);
                         localStorage.setItem('userLastName', data.lastName);
-                        this.router.navigateByUrl('/mail/inbox');
+                        this.router.navigateByUrl('/mail/inbox/primary');
                     },
                     error => console.error(error)
                     )
