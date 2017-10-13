@@ -263,6 +263,8 @@ export class EmailService {
     }
 
 
+
+
     markReadHighlighted(){
        const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
