@@ -213,6 +213,7 @@ export class HeaderComponent {
         this.emailService.markReadHighlighted().subscribe();
         //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
+        console.log(this.emailService.emails);
     }
 
 
