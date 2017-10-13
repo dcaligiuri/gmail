@@ -263,9 +263,6 @@ export class EmailService {
     }
 
 
-
-
-
     markReadHighlighted(){
        const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
@@ -400,6 +397,7 @@ export class EmailService {
                 }
                 return transformedMessages.reverse();
             })
+            .catch((error: Response) => Observable.throw(error.json()));
     }
 
 
