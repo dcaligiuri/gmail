@@ -48,10 +48,10 @@ public currentPath: string;
         this.subscriptionLow = this.emailService.low$
             .subscribe(item => this.lower = item);
 
-        this.subUrls = this.route.url.subscribe(urlsegs => {
-            this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
-            this.chooseEmailList(urlsegs);
-        });
+        //this.subUrls = this.route.url.subscribe(urlsegs => {
+            //this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
+            //this.chooseEmailList(urlsegs);
+        //});
 
     });
 
