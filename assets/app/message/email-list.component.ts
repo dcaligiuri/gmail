@@ -43,17 +43,21 @@ public currentPath: string;
                             this.messages = messages;
                         }
                     );
+        
+
+    });
+
         this.subscription = this.emailService.upp$
             .subscribe(item => this.upper = item);
         this.subscriptionLow = this.emailService.low$
             .subscribe(item => this.lower = item);
 
+
+
         this.subUrls = this.route.url.subscribe(urlsegs => {
             this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
             this.chooseEmailList(urlsegs);
         });
-
-    });
 
 
 
