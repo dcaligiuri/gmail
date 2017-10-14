@@ -53,11 +53,18 @@ public currentPath: string;
             .subscribe(item => this.lower = item);
 
 
+        this.emailService.getMessages('spam')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
 
-        this.subUrls = this.route.url.subscribe(urlsegs => {
-            this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
-            this.chooseEmailList(urlsegs);
-        });
+
+        //this.subUrls = this.route.url.subscribe(urlsegs => {
+            //this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
+            //this.chooseEmailList(urlsegs);
+        //});
 
 
 
