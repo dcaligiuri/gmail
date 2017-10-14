@@ -471,6 +471,7 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages.reverse().reverse();
                 }
+                console.log(transformedMessages);
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
