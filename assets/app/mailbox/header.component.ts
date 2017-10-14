@@ -165,7 +165,7 @@ export class HeaderComponent {
     markAllRead(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markAllRead().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
         
     }
@@ -174,7 +174,7 @@ export class HeaderComponent {
         let currTab = this.emailService.getCurrentTab();
         let originalLocation = this.activatedRoute.snapshot.firstChild.url[2].path 
         this.emailService.moveEmail(placeToMove, originalLocation).subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
@@ -184,7 +184,7 @@ export class HeaderComponent {
     trashHighlightedMess(){
         let currTab = this.emailService.getCurrentTab();
     	this.emailService.trashHighlightedEmails().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
@@ -211,7 +211,7 @@ export class HeaderComponent {
     markHighlightedRead(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markReadHighlighted().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
         console.log(this.emailService.emails);
     }
@@ -220,14 +220,14 @@ export class HeaderComponent {
     markHighlightedUnread(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markUnreadHighlighted().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
     starHighlighted(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.starHighlightedEmails().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
