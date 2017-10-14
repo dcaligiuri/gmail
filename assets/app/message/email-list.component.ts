@@ -53,7 +53,7 @@ public currentPath: string;
             .subscribe(item => this.lower = item);
 
 
-        this.emailService.getMessages('spam')
+        this.emailService.getMessages('primary')
             .subscribe(
                 (messages: Email[]) => {
                     this.messages = messages;
