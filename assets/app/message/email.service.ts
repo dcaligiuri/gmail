@@ -468,10 +468,10 @@ export class EmailService {
                         message._id
                     ));
                 }
-                this.emails = transformedMessages.reverse();
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages.reverse().reverse();
                 }
+                return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
