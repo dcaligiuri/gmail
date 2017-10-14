@@ -444,6 +444,44 @@ export class EmailService {
     */
 
 
+
+    getMessages(target: String){
+        const token = localStorage.getItem('token') ?
+        '?token=' + localStorage.getItem('token')
+        : '';
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
+            .map((response: Response) => {
+                const messages = response.json().obj;
+                let transformedMessages: Email[] = [];
+                for (let message of messages) {
+                    transformedMessages.push(new Email(
+                        message.content,
+                        message.fromEmail,
+                        message.toEmail,
+                        message.starred,
+                        message.subject,
+                        message.read,
+                        message.spam,
+                        message.timeStamp,
+                        message.labels,
+                        message.trash,
+                        message._id
+                    ));
+                }
+                if (target === 'primary'){
+                    this.unreadEmails = transformedMessages.reverse().reverse();
+                }
+                this.emails = transformedMessages.reverse();
+                console.log(transformedMessages);
+                return transformedMessages.reverse();
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
+    }
+
+
+
+
+
 /*
 
     getMessages(target: String){
