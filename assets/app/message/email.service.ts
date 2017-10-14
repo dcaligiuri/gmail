@@ -444,6 +444,7 @@ export class EmailService {
     */
 
 
+/*
 
     getMessages(target: String){
         const token = localStorage.getItem('token') ?
@@ -477,6 +478,8 @@ export class EmailService {
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
+
+ */
 
     getMessagesForSearch(target: String) {
         const token = localStorage.getItem('token') ?
