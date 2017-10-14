@@ -35,6 +35,13 @@ public currentPath: string;
 
     ngOnInit() {
 
+        this.emailService.getMessages('primary')
+            .subscribe(
+                (messages: Email[]) => {
+                    this.messages = messages;
+                }
+            );
+
         this.sub = this.route.params.subscribe(params => {
         this.searchTerm = params['searchTerm']; 
         this.emailService.searchMessages(this.searchTerm)
@@ -53,12 +60,7 @@ public currentPath: string;
             .subscribe(item => this.lower = item);
 
 
-        this.emailService.getMessages('primary')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
+
 
 
         //this.subUrls = this.route.url.subscribe(urlsegs => {
