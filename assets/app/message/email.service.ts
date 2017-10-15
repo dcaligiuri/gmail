@@ -493,7 +493,7 @@ export class EmailService {
                     this.unreadEmails = transformedMessages.reverse().reverse();
                 }
                 this.emails = transformedMessages.reverse();
-                //return transformedMessages.reverse();
+                return transformedMessages.reverse();
             })
             //.catch((error: Response) => Observable.throw(error.json()));
     }
