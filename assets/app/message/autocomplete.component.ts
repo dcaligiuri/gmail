@@ -24,12 +24,12 @@ export class AutocompleteComponent {
 
   ngOnInit() {
 
-      this.emailService.getMessagesForSearch('all')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
+      //this.emailService.getMessagesForSearch('all')
+            //.subscribe(
+            //    (messages: Email[]) => {
+            //        this.messages = messages;
+            //    }
+           // );
              
   }
 
