@@ -35,10 +35,6 @@ public currentPath: string;
 
     ngOnInit() {
 
-
-        this.messages = this.emailService.emails;
-
-
         //this.sub = this.route.params.subscribe(params => {
         //this.searchTerm = params['searchTerm']; 
         //this.emailService.searchMessages(this.searchTerm)
@@ -60,10 +56,12 @@ public currentPath: string;
 
 
 
-      //  this.subUrls = this.route.url.subscribe(urlsegs => {
-       //     this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
-       //     this.chooseEmailList(urlsegs);
-       // });
+        this.subUrls = this.route.url.subscribe(urlsegs => {
+            this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
+            this.chooseEmailList(urlsegs);
+        });
+
+        this.messages = this.emailService.emails;
 
 
 
