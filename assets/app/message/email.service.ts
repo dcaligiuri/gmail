@@ -294,7 +294,9 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
-                this.emails = transformedMessages.reverse();
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -473,11 +475,6 @@ export class EmailService {
         return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
             .map((response: Response) => {
                 const messages = response.json().obj;
-
-                console.log(messages);
-
-
-
                 let transformedMessages: Email[] = [];
                 for (let message of messages) {
                     transformedMessages.push(new Email(
@@ -497,7 +494,15 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
-                this.emails = transformedMessages.reverse();
+
+
+
+
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+
+
                 return transformedMessages;
             })
             //.catch((error: Response) => Observable.throw(error.json()));
