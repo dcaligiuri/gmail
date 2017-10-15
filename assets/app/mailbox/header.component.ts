@@ -56,6 +56,11 @@ export class HeaderComponent {
     }
 
 
+    showEmailService(){
+        console.log(this.emailService.emails);
+    }
+
+
 
     changeThickness(event: any, thickness: string){
         this.emailService.changeThickness(thickness);
