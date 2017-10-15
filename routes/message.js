@@ -406,9 +406,22 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
             
         });
     }
-    res.status(200).json({
-                message: 'Success'
+
+    var decoded = jwt.decode(req.query.token);
+    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
             });
+        });
 
 });
 
