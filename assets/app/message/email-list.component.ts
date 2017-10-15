@@ -36,12 +36,7 @@ public currentPath: string;
     ngOnInit() {
 
 
-        this.emailService.getMessages('primary')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
+        this.messages = this.emailService.emails;
 
 
         //this.sub = this.route.params.subscribe(params => {
