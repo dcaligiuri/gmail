@@ -303,7 +303,7 @@ export class EmailService {
     }
 
 
-    markUnreadHighlighted(){
+    markUnreadHighlighted(target: string){
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
