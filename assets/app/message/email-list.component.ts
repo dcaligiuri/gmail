@@ -54,21 +54,10 @@ public currentPath: string;
 
 
 
-
-
         this.subUrls = this.route.url.subscribe(urlsegs => {
             this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
             this.chooseEmailList(urlsegs);
         });
-
-        this.emailService.getMessages('primary')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = this.emailService.emails;
-                }
-            );
-
-        
 
 
 
