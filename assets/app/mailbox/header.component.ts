@@ -216,7 +216,8 @@ export class HeaderComponent {
     markHighlightedRead(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markReadHighlighted(currTab).subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        console.log(currTab);
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
@@ -224,7 +225,7 @@ export class HeaderComponent {
     markHighlightedUnread(){
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markUnreadHighlighted(currTab).subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+        //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
