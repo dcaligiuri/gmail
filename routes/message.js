@@ -5,14 +5,6 @@ var Email = require('../assets/app/models/message');
 var User = require('../assets/app/models/user');
 var jwt = require('jsonwebtoken');
 
-var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
-              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
-              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
-              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
-              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
-              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
-              'sent':{"fromEmail": decoded.user.email}};
-
 
 router.post('/inbox/star', function (req, res, next) {
 
@@ -382,6 +374,7 @@ router.post('/starHighlighted', function (req, res, next) {
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
+
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
             if (err) {
@@ -395,6 +388,15 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     }
 
     var decoded = jwt.decode(req.query.token);
+
+    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
+              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
+              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
+              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
+              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
+              'sent':{"fromEmail": decoded.user.email}};
+
 
     Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
@@ -447,6 +449,14 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
         });
     }
     var decoded = jwt.decode(req.query.token);
+    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
+              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
+              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
+              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
+              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
+              'sent':{"fromEmail": decoded.user.email}};
+
     Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
         .exec(function (err, messages) {
