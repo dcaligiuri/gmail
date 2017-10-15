@@ -322,6 +322,7 @@ export class EmailService {
         const headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
+                /*
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
                 for (let message of messages) {
@@ -346,6 +347,7 @@ export class EmailService {
                     return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
                 });
                 //return transformedMessages.reverse();
+                */
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
