@@ -294,7 +294,7 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages.reverse().reverse();
                 }
-                this.emails = transformedMessages.reverse();
+                this.emails = transformedMessages.sort();
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -492,7 +492,7 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
-                this.emails = transformedMessages.reverse();
+                this.emails = transformedMessages.sort();
                 return transformedMessages;
             })
             //.catch((error: Response) => Observable.throw(error.json()));
@@ -567,7 +567,7 @@ export class EmailService {
                         message._id
                     ));
                 }
-                return transformedMessages.reverse();
+                return transformedMessages.sort();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
