@@ -1,5 +1,5 @@
 <app-inbox-header *ngIf="displayInboxHeader()"></app-inbox-header>
-<div *ngFor="let message of messages; let i=index">
+<div *ngFor="let message of getStuff(); let i=index">
 
 	<div *ngIf="lower - 1 <= i && i < upper">
         <app-email 
