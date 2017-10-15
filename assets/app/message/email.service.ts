@@ -300,7 +300,7 @@ export class EmailService {
                 this.emails = transformedMessages.sort(function(a, b) {
                     return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
                 });
-                return transformedMessages.reverse();
+                //return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -343,7 +343,7 @@ export class EmailService {
                 this.emails = transformedMessages.sort(function(a, b) {
                     return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
                 });
-                return transformedMessages.reverse();
+                //return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -528,7 +528,7 @@ export class EmailService {
                     return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
                 });
 
-                return transformedMessages.reverse();
+                //return transformedMessages.reverse();
             })
             //.catch((error: Response) => Observable.throw(error.json()));
     }
