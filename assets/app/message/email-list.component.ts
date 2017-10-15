@@ -54,10 +54,10 @@ public currentPath: string;
 
     //});
 
-        //this.subscription = this.emailService.upp$
-        //    .subscribe(item => this.upper = item);
-       // this.subscriptionLow = this.emailService.low$
-       //     .subscribe(item => this.lower = item);
+        this.subscription = this.emailService.upp$
+            .subscribe(item => this.upper = item);
+        this.subscriptionLow = this.emailService.low$
+            .subscribe(item => this.lower = item);
 
 
 
