@@ -35,38 +35,38 @@ public currentPath: string;
 
     ngOnInit() {
 
-        this.emailService.getMessages('primary')
-            .subscribe(
-                (messages: Email[]) => {
-                    this.messages = messages;
-                }
-            );
+        ///this.emailService.getMessages('primary')
+            //.subscribe(
+               // (messages: Email[]) => {
+              //      this.messages = messages;
+             //   }
+           // );
 
-        //this.sub = this.route.params.subscribe(params => {
-        //this.searchTerm = params['searchTerm']; 
-        //this.emailService.searchMessages(this.searchTerm)
-                    //.subscribe(
-                    //    (messages: Email[]) => {
-                   //         this.messages = messages;
-                   //     }
-                   // );
+        this.sub = this.route.params.subscribe(params => {
+        this.searchTerm = params['searchTerm']; 
+        this.emailService.searchMessages(this.searchTerm)
+                    .subscribe(
+                        (messages: Email[]) => {
+                            this.messages = messages;
+                        }
+                    );
         
 
-    //});
+    });
 
-      //  this.subscription = this.emailService.upp$
-       //     .subscribe(item => this.upper = item);
-       // this.subscriptionLow = this.emailService.low$
-       //     .subscribe(item => this.lower = item);
-
-
+        this.subscription = this.emailService.upp$
+            .subscribe(item => this.upper = item);
+        this.subscriptionLow = this.emailService.low$
+            .subscribe(item => this.lower = item);
 
 
 
-        //this.subUrls = this.route.url.subscribe(urlsegs => {
-            //this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
-            //this.chooseEmailList(urlsegs);
-        //});
+
+
+        this.subUrls = this.route.url.subscribe(urlsegs => {
+            this.emailService.setCurrentTab(this.retCurrTab(urlsegs));
+            this.chooseEmailList(urlsegs);
+        });
 
 
 

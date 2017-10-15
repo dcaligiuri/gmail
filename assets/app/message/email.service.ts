@@ -472,6 +472,7 @@ export class EmailService {
                     this.unreadEmails = transformedMessages.reverse().reverse();
                 }
                 this.emails = transformedMessages.reverse();
+                console.log(transformedMessages);
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
