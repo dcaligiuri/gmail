@@ -61,10 +61,6 @@ public currentPath: string;
             this.chooseEmailList(urlsegs);
         });
 
-        this.messages = this.emailService.getEmails();
-
-
-
       /*
 
 
