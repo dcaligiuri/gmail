@@ -42,22 +42,22 @@ public currentPath: string;
                 }
             );
 
-        this.sub = this.route.params.subscribe(params => {
-        this.searchTerm = params['searchTerm']; 
-        this.emailService.searchMessages(this.searchTerm)
-                    .subscribe(
-                        (messages: Email[]) => {
-                            this.messages = messages;
-                        }
-                    );
+        //this.sub = this.route.params.subscribe(params => {
+        //this.searchTerm = params['searchTerm']; 
+        //this.emailService.searchMessages(this.searchTerm)
+                    //.subscribe(
+                    //    (messages: Email[]) => {
+                   //         this.messages = messages;
+                   //     }
+                   // );
         
 
-    });
+    //});
 
-        this.subscription = this.emailService.upp$
-            .subscribe(item => this.upper = item);
-        this.subscriptionLow = this.emailService.low$
-            .subscribe(item => this.lower = item);
+      //  this.subscription = this.emailService.upp$
+       //     .subscribe(item => this.upper = item);
+       // this.subscriptionLow = this.emailService.low$
+       //     .subscribe(item => this.lower = item);
 
 
 
