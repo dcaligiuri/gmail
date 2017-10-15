@@ -471,7 +471,7 @@ export class EmailService {
                 //if (target === 'primary'){
                     //this.unreadEmails = transformedMessages.reverse().reverse();
                 //}
-                //this.emails = transformedMessages.reverse();
+                this.emails = transformedMessages.reverse();
                 //console.log(transformedMessages);
                 return transformedMessages.reverse();
             })
