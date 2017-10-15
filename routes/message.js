@@ -396,12 +396,18 @@ router.post('/starHighlighted', function (req, res, next) {
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
-        Email.find({ _id: req.body[key] }).update({"read": true}).exec();
+        Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success'
+            });
+        });
     }
-
-    res.status(200).json({
-        message: 'Success'
-    });
 
 });
 
