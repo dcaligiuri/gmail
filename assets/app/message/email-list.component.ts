@@ -38,7 +38,7 @@ public currentPath: string;
         this.emailService.getMessages('primary')
                     .subscribe(
                         (messages: Email[]) => {
-                            this.messages = messages;
+                            this.messages = this.emailService.emails;
                         }
                     );
 
