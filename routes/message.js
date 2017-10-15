@@ -387,7 +387,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     }
 
     var decoded = jwt.decode(req.query.token);
-    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ target ] }})
+    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ req.query.target ] }})
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
@@ -438,7 +438,7 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
         });
     }
     var decoded = jwt.decode(req.query.token);
-    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ target ] }})
+    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ req.query.token ] }})
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
