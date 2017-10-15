@@ -275,7 +275,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted/' + token + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -318,7 +318,7 @@ export class EmailService {
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted/' + token + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
