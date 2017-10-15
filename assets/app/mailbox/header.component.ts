@@ -212,6 +212,7 @@ export class HeaderComponent {
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markReadHighlighted().subscribe();
         this.emailService.getMessages(currTab).subscribe();
+        console.log(this.emailService.emails);
         this.emailService.clearHighlightedEmails();
     }
 
@@ -220,6 +221,7 @@ export class HeaderComponent {
         let currTab = this.emailService.getCurrentTab();
         this.emailService.markUnreadHighlighted().subscribe();
         this.emailService.getMessages(currTab).subscribe();
+        console.log(this.emailService.emails);
         this.emailService.clearHighlightedEmails();
     }
 
