@@ -292,9 +292,9 @@ export class EmailService {
                     ));
                 }
                 if (target === 'primary'){
-                    this.unreadEmails = transformedMessages.reverse().reverse();
+                    this.unreadEmails = transformedMessages;
                 }
-                this.emails = transformedMessages.sort();
+                this.emails = transformedMessages.reverse();
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -492,7 +492,7 @@ export class EmailService {
                 if (target === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
-                this.emails = transformedMessages.sort();
+                this.emails = transformedMessages.reverse();
                 return transformedMessages;
             })
             //.catch((error: Response) => Observable.throw(error.json()));
