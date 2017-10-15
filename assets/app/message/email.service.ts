@@ -311,7 +311,7 @@ export class EmailService {
         '?token=' + localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
-        '?target=' + target
+        '&target=' + target
         : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
