@@ -478,6 +478,11 @@ export class EmailService {
     }
 
 
+    getEmails(){
+        return this.emails; 
+    }
+
+
 
 
 
