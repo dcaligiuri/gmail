@@ -314,7 +314,30 @@ export class EmailService {
         const headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + token, highlighted, {headers: headers})
             .map((response: Response) => {
-                const result = response;
+                const messages = response.json().obj;
+                let transformedMessages: Email[] = [];
+                for (let message of messages) {
+                    transformedMessages.push(new Email(
+                        message.content,
+                        message.fromEmail,
+                        message.toEmail,
+                        message.starred,
+                        message.subject,
+                        message.read,
+                        message.spam,
+                        message.timeStamp,
+                        message.labels,
+                        message.trash,
+                        message._id
+                    ));
+                }
+                if (target === 'primary'){
+                    this.unreadEmails = transformedMessages;
+                }
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+                return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
