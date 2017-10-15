@@ -5,6 +5,7 @@ var Email = require('../assets/app/models/message');
 var User = require('../assets/app/models/user');
 var jwt = require('jsonwebtoken');
 
+
 router.post('/inbox/star', function (req, res, next) {
 
         Email.find({"_id": req.body.messageId})
@@ -91,28 +92,6 @@ router.get('/primary', function (req, res, next) {
             });
         });
 });
-
-/*
-router.get('/inbox', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
-    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
-        .populate('user', 'firstName')
-        //.limit(14)
-        //.skip(14)
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-        });
-});
-*/
 
 
 router.get('/social', function (req, res, next) {
