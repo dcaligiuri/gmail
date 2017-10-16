@@ -30,9 +30,35 @@ router.post('/moveEmail', function (req, res, next) {
         Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
     }
 
-    res.status(200).json({
-        message: 'Success'
-    });
+    var decoded = jwt.decode(req.query.token);
+
+    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
+              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
+              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
+              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
+              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
+              'sent':{"fromEmail": decoded.user.email},
+              'spam':{"user": decoded.user._id, "spam": "true"},
+              'trash':{"user": decoded.user._id, "trash":"true"},
+              'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
+          };
+
+
+    Email.find(queryCodes[req.query.oldLocation])
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+        });
 });
 
 
