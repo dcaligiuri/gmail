@@ -320,7 +320,6 @@ router.post('/changeLabelHighlighted', function (req, res, next) {
 
 router.post('/trashHighlighted', function (req, res, next) {
 
-
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"trash": "true"}).exec();
     }
@@ -395,7 +394,11 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
               'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
               'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
               'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
-              'sent':{"fromEmail": decoded.user.email}};
+              'sent':{"fromEmail": decoded.user.email},
+              'spam':{"user": decoded.user._id, "spam": "true"},
+              'trash':{"user": decoded.user._id, "trash":"true"},
+              'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
+          };
 
 
     Email.find(queryCodes[req.query.target])
@@ -455,7 +458,11 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
               'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
               'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
               'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
-              'sent':{"fromEmail": decoded.user.email}};
+              'sent':{"fromEmail": decoded.user.email},
+              'spam':{"user": decoded.user._id, "spam": "true"},
+              'trash':{"user": decoded.user._id, "trash":"true"},
+              'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
+          };
 
     Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
