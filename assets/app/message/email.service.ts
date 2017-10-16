@@ -84,9 +84,9 @@ export class EmailService {
                         message._id
                     ));
                 }
-                if (oldLocation === 'primary' || newLocation === 'primary'){
-                    this.unreadEmails = transformedMessages;
-                }
+                //if (oldLocation === 'primary' || newLocation === 'primary'){
+                    //this.unreadEmails = transformedMessages;
+               // }
 
                 this.emails = transformedMessages.sort(function(a, b) {
                     return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
