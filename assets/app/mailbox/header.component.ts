@@ -56,8 +56,11 @@ export class HeaderComponent {
     }
 
 
-    showEmailService(){
+    showEmailsInService(){
         console.log(this.emailService.emails);
+    }
+    showHighlightedEmailsInService(){
+        console.log(this.emailService.highlightedEmails);
     }
 
 
