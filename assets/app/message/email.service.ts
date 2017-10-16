@@ -84,7 +84,7 @@ export class EmailService {
                         message._id
                     ));
                 }
-                if (oldLocation === 'primary'){
+                if (oldLocation === 'primary' || newLocation === 'primary'){
                     this.unreadEmails = transformedMessages;
                 }
 
