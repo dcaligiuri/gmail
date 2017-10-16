@@ -94,7 +94,6 @@ export class EmailService {
 
                 return transformedMessages.reverse();
             })
-            .catch((error: Response) => Observable.throw(error.json()));
     }
 
 
