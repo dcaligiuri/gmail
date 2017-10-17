@@ -400,6 +400,7 @@ router.post('/starHighlighted', function (req, res, next) {
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
+        console.log(req.body[key]);
         Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
             if (err) {
                 return res.status(500).json({
