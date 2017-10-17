@@ -465,12 +465,12 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
 
-        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc){
+        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":false}},function(err, doc){
             if(err){
                 console.log("Something wrong when updating data!");
             }
         });
-        
+
     }
 
     var decoded = jwt.decode(req.query.token);
