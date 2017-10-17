@@ -405,6 +405,9 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
             if(err){
                 console.log("Something wrong when updating data!");
             }
+            else if(doc){
+                console.log(doc);
+            }
         });
     }
 
@@ -468,6 +471,9 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
         Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":false}},function(err, doc){
             if(err){
                 console.log("Something wrong when updating data!");
+            }
+            else if(doc){
+                console.log(doc);
             }
         });
 
