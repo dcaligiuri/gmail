@@ -474,16 +474,12 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
 
     for (var key in req.body) {
-        Email.find({ _id: req.body[key] }).update({"read": false}).exec(function (err) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
+        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":false}},function(err, doc){
+            if(err){
+                console.log("Something wrong when updating data!");
             }
-            
-        });
     }
+
     var decoded = jwt.decode(req.query.token);
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
