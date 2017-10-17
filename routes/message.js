@@ -399,6 +399,7 @@ router.post('/starHighlighted', function (req, res, next) {
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
+    console.log(req.body);
 
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
@@ -466,6 +467,8 @@ router.post('/markAllRead', function (req, res, next) {
 
 router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
+    console.log(req.body);
+    
     for (var key in req.body) {
         Email.find({ _id: req.body[key] }).update({"read": false}).exec(function (err) {
             if (err) {
