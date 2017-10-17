@@ -401,13 +401,19 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
         console.log(req.body[key]);
-        Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
+
+        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc){
+            if(err){
+                console.log("Something wrong when updating data!");
             }
+
+        //Email.find({ _id: req.body[key] }).update({"read": true}).exec(function (err) {
+          //  if (err) {
+              //  return res.status(500).json({
+              //      title: 'An error occurred',
+              //      error: err
+              /// });
+           /// }
             
         });
     }
