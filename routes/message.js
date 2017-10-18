@@ -399,8 +399,6 @@ router.post('/starHighlighted', function (req, res, next) {
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
-    var retMessages = true;
-
     var decoded = jwt.decode(req.query.token);
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
@@ -415,6 +413,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
 
+          console.log(req.body);
 
     /*
 
