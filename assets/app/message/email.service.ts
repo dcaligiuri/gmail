@@ -298,11 +298,20 @@ export class EmailService {
         '&target=' + target
         : '';
        var highlighted = {};
+       console.log(this.emails);
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
+            this.emails.splice(this.emails.indexOf(highlighted[index]), 1);
         }
-        console.log(highlighted);
+
         console.log(this.emails);
+
+
+
+        //console.log(highlighted);
+        //console.log(this.emails);
+
+
         const headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
