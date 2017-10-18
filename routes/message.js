@@ -396,11 +396,15 @@ router.post('/starHighlighted', function (req, res, next) {
 });
 
 
+function callback () {
+  console.log("MARKED");
+}
+
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
     var decoded = jwt.decode(req.query.token);
-    var total = [];
+    var arrToRead = [];
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
@@ -418,41 +422,31 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
 
-        total.push(req.body[key]);
-
-        //Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
-       //     if(err){
-        //        console.log("Something wrong when updating data!");
-        ////    }
-        ///    else if(doc){
-        ///        console.log(doc);
-        //    }
-       /// });
-    }
-
-    console.log(total);
+        arrToRead.push(req.body[key]);
 
 
+        /*
 
-
-    
-
-
-    Email.find(queryCodes[req.query.target])
-        .populate('user', 'firstName')
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
+        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
+            if(err){
+                console.log("Something wrong when updating data!");
             }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
+            else if(doc){
+                console.log(doc);
+            }
         });
 
+        */
+    }
+
+    Email.update(
+        { _id: { $in: arrToRead } },
+        { $set: { "read" : true } },
+        options,
+        callback
+    )
+
+    
 });
 
 
