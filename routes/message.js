@@ -436,8 +436,6 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
         , function(err,docs) { console.log(docs); });
 
 
-
-
     Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
         .exec(function (err, messages) {
