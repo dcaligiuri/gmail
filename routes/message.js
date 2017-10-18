@@ -396,9 +396,9 @@ router.post('/starHighlighted', function (req, res, next) {
 });
 
 
-function callback (decoded) {
-  Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
-        .set("read", true)
+function callback () {
+
+  Email.find({"spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
@@ -458,7 +458,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
         { _id: { $in: arrToRead } },
         { $set: { "read" : true } },
         { multi: true },
-        callback(decoded)
+        callback
     )
 
 });
