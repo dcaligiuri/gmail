@@ -434,10 +434,9 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 
 
     Email.update( { _id: { $in: arrToRead } }, {"read":false} , {multi: true} 
-        , function(err,docs) { console.log(docs); });
-
-
-    Email.find(queryCodes[req.query.target])
+        , function(err,docs) 
+        { 
+            Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
@@ -451,6 +450,11 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
                 obj: messages
             });
         });
+
+        });
+
+
+    
 
 });
 
