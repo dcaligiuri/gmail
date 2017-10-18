@@ -415,6 +415,9 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
 
+
+    /*
+
     for (var key in req.body) {
 
         Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
@@ -430,6 +433,8 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     next(){
         console.log("la");
     }
+
+    */
 
     
 
