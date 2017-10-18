@@ -396,6 +396,8 @@ router.post('/starHighlighted', function (req, res, next) {
 });
 
 
+
+
 function callback () {
   console.log("MARKED");
 }
@@ -442,7 +444,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     Email.update(
         { _id: { $in: arrToRead } },
         { $set: { "read" : true } },
-        options,
+        { multi: true },
         callback
     )
 
