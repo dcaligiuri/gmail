@@ -418,7 +418,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
 
-        total.push(req.body[key]);
+        arrToRead.push(req.body[key]);
 
         //Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
        //     if(err){
@@ -432,7 +432,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 
 
 
-    Email.update( {_id : {"$in":total}}, {active:false} , {multi: true} 
+    Email.update( {_id : {"$in":arrToRead}}, {active:false} , {multi: true} 
         , function(err,docs) { console.log(docs); });
 
 
