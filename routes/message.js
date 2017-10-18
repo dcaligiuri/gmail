@@ -400,6 +400,7 @@ router.post('/starHighlighted', function (req, res, next) {
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
     var decoded = jwt.decode(req.query.token);
+    var total = [];
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
@@ -413,27 +414,26 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
 
-          console.log(req.body);
 
-    /*
 
     for (var key in req.body) {
 
-        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
-            if(err){
-                console.log("Something wrong when updating data!");
-            }
-            else if(doc){
-                console.log(doc);
-            }
-        });
+        total.push(req.body[key]);
+
+        //Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":true}},function(err, doc, next){
+       //     if(err){
+        //        console.log("Something wrong when updating data!");
+        ////    }
+        ///    else if(doc){
+        ///        console.log(doc);
+        //    }
+       /// });
     }
 
-    next(){
-        console.log("la");
-    }
+    console.log(total);
 
-    */
+
+
 
     
 
