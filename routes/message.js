@@ -43,11 +43,10 @@ router.post('/moveEmail', function (req, res, next) {
 
 
     movingEmail = function(callback){
+        var goAhead = 0;
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { console.log(data); })
-            console.log("BEFORE");
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { goAhead++; })
         }
-        callback();
     }
 
     movingEmail(function() {
@@ -501,7 +500,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 router.post('/markAllRead', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Email.find({"user": decoded.user._id, "read":"false"})
-        .updateMany({"read":"true"})
+        .set({"read":"true"})
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({
