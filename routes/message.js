@@ -480,6 +480,8 @@ router.post('/markAllRead', function (req, res, next) {
 
 router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
+    var arrToUnread = [];
+
     var decoded = jwt.decode(req.query.token);
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
@@ -496,6 +498,8 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
     for (var key in req.body) {
 
+        arrToUnread.push(req.body[key]);
+        /*
         Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":false}},function(err, doc){
             if(err){
                 console.log("Something wrong when updating data!");
@@ -504,11 +508,15 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
                 console.log(doc);
             }
         });
+        */
 
     }
 
-    
-    Email.find(queryCodes[req.query.target])
+
+    Email.update( { _id: { $in: arrToUnread } }, {"read":false} , {multi: true} 
+        , function(err,docs) 
+        { 
+            Email.find(queryCodes[req.query.target])
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
@@ -522,6 +530,9 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
                 obj: messages
             });
         });
+
+        });
+
         
 });
 
