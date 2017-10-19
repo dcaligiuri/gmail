@@ -24,16 +24,27 @@ router.post('/inbox/star', function (req, res, next) {
         });
 });
 
+
+
+
+
+
+
+
+
+
 router.post('/moveEmail', function (req, res, next) {
 
-
-    for (var key in req.body) {
-        Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
+    movingEmail = function(callback){
+        for (var key in req.body) {
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
+        }
+        callback();
     }
 
-    var decoded = jwt.decode(req.query.token);
-
-    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+    movingEmail(function() {
+        var decoded = jwt.decode(req.query.token);
+        var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
               'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
               'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
@@ -44,9 +55,7 @@ router.post('/moveEmail', function (req, res, next) {
               'trash':{"user": decoded.user._id, "trash":"true"},
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
-
-
-    Email.find(queryCodes[req.query.oldLocation])
+        Email.find(queryCodes[req.query.oldLocation])
         .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
@@ -60,6 +69,26 @@ router.post('/moveEmail', function (req, res, next) {
                 obj: messages
             });
         });
+    });
+
+    
+
+
+    //setSource = function(callback) {
+    // do editor things
+    
+        //console.log("FIRST");
+        //callback();
+    //}
+
+    //setSource(function() {
+        //console.log("LATER");
+    //});
+
+
+
+
+    
 });
 
 
