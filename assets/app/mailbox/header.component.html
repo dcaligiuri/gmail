@@ -102,7 +102,7 @@
       <li class="linkDisabled" *ngIf="!onSelected()"role="menuitem"><a (click)="markAllRead()" class="dropdown-item">Mark All As Read</a></li>
       <li *ngIf="!onSelected()"role="menuitem"><a class="dropdown-item" href="#">Select messages to see more actions</a></li>
       <li *ngIf="unreadSelected()" role="menuitem"><a style="cursor: pointer" (click)="markHighlightedRead()" class="dropdown-item">Mark as read</a></li>
-      <li *ngIf="readSelected()" role="menuitem"><a (click)="markHighlightedUnread()" class="dropdown-item">Mark as unread</a></li>
+      <li *ngIf="readSelected()" role="menuitem"><a style="cursor: pointer (click)="markHighlightedUnread()" class="dropdown-item">Mark as unread</a></li>
       <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Mark as not important</a></li>
       <li *ngIf="onSelected()"role="menuitem"><a class="dropdown-item" href="#">Add to Tasks</a></li>
       <li *ngIf="onSelected()" role="menuitem"><a style="cursor: pointer" (click)="starHighlighted()" class="dropdown-item">Add star</a></li>
