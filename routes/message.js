@@ -433,7 +433,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
     console.log(arrToRead);
 
 
-    Email.update( { _id: { $in: arrToRead } }, {"read":false} , {multi: true} 
+    Email.update( { _id: { $in: arrToRead } }, {"read":true} , {multi: true} 
         , function(err,docs) 
         { 
             Email.find(queryCodes[req.query.target])
