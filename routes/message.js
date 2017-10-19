@@ -38,11 +38,13 @@ router.post('/moveEmail', function (req, res, next) {
     movingEmail = function(callback){
         for (var key in req.body) {
             Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
+            console.log("BEFORE");
         }
         callback();
     }
 
     movingEmail(function() {
+        console.log("AFTER");
         var decoded = jwt.decode(req.query.token);
         var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
