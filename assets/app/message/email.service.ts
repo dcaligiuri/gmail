@@ -68,6 +68,7 @@ export class EmailService {
        return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + token + '&oldLocation=' + oldLocation, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
+                console.log(messages);
                 let transformedMessages: Email[] = [];
                 for (let message of messages) {
                     transformedMessages.push(new Email(
