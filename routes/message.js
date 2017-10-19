@@ -35,9 +35,16 @@ router.post('/inbox/star', function (req, res, next) {
 
 router.post('/moveEmail', function (req, res, next) {
 
+
+
+    //processedIds.forEach(function(id)){
+    //Model.update({"_id": id}, {"$set": {"status": "processed" }}, callback);
+    //});
+
+
     movingEmail = function(callback){
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { console.log(data); })
             console.log("BEFORE");
         }
         callback();
