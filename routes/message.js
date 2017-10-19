@@ -35,6 +35,8 @@ router.post('/inbox/star', function (req, res, next) {
 
 router.post('/moveEmail', function (req, res, next) {
 
+        console.log(req.body);
+
     movingEmail = function(callback){
         for (var key in req.body) {
             Email.find({ _id: key }).update({"labels": req.body[key]}).exec();
@@ -55,20 +57,7 @@ router.post('/moveEmail', function (req, res, next) {
               'trash':{"user": decoded.user._id, "trash":"true"},
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
-        Email.find(queryCodes[req.query.oldLocation])
-        .populate('user', 'firstName')
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-        });
+
     });
 
     
