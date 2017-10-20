@@ -392,7 +392,6 @@ router.post('/trashHighlighted', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     var trashThese = [];
 
-
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
               'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
@@ -405,7 +404,6 @@ router.post('/trashHighlighted', function (req, res, next) {
               'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
           };
 
-           console.log(queryCodes[req.query.target]);
 
     for (var key in req.body) {
         trashThese.push(req.body[key]);  
