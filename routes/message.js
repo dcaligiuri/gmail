@@ -409,10 +409,6 @@ router.post('/trashHighlighted', function (req, res, next) {
         trashThese.push(req.body[key]);  
     }
 
-    console.log(trashThese);
-    console.log(queryCodes[req.query.target]);
-    console.log(req.query.target);
-
     Email.update( { _id: { $in: trashThese } }, {"trash":"true"} , {multi: true} 
         , function(err,docs) 
         { 

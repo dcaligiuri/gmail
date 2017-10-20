@@ -191,8 +191,7 @@ export class HeaderComponent {
     
     trashHighlightedMess(){
         let currTab = this.emailService.getCurrentTab();
-    	this.emailService.trashHighlightedEmails().subscribe();
-        this.emailService.getMessages(currTab).subscribe();
+    	this.emailService.trashHighlightedEmails(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
     }
 
