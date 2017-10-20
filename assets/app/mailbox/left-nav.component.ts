@@ -24,7 +24,7 @@ export class LeftSideComponent {
  	constructor(private emailService: EmailService) {}
 
     lessMoreDrop(){
-        this.emailService.getSpamCount();
+        //this.emailService.getSpamCount();
         if (this.showHide === false){
             this.showHide = true; 
             event.target.innerHTML = "Less<i class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>";
