@@ -47,6 +47,10 @@ router.post('/moveEmail', function (req, res, next) {
         for (var key in req.body) {
             Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { goAhead++; })
         }
+        if (goAhead == req.body.length){
+            
+        }
+        
     }
 
     movingEmail(function() {
@@ -500,7 +504,7 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
 router.post('/markAllRead', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Email.find({"user": decoded.user._id, "read":"false"})
-        .set({"read":"true"})
+        .updateMany({"read":"true"})
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({
@@ -535,19 +539,7 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
 
     for (var key in req.body) {
-
         arrToUnread.push(req.body[key]);
-        /*
-        Email.findOneAndUpdate({_id: req.body[key]}, {$set:{"read":false}},function(err, doc){
-            if(err){
-                console.log("Something wrong when updating data!");
-            }
-            else if(doc){
-                console.log(doc);
-            }
-        });
-        */
-
     }
 
 
