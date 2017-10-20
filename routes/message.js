@@ -405,7 +405,7 @@ router.post('/trashHighlighted', function (req, res, next) {
           };
 
     for (var key in req.body) {
-        arrToRead.push(req.body[key]);  
+        trashThese.push(req.body[key]);  
     }
 
     Email.update( { _id: { $in: trashThese } }, {"trash":"true"} , {multi: true} 
