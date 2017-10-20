@@ -229,16 +229,19 @@ export class EmailService {
         return false; 
     }
 
-    trashHighlightedEmails(){
+    trashHighlightedEmails(target: string){
         const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
+        : '';
+        const modifiedTarget = target ?
+        '&target=' + target
         : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/trashHighlighted' + token, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/trashHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -257,7 +260,13 @@ export class EmailService {
                         message._id
                     ));
                 }
-                this.emails = transformedMessages.reverse();
+                if (target === 'primary'){
+                    this.unreadEmails = transformedMessages;
+                }
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+                return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
