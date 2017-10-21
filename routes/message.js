@@ -1,3 +1,8 @@
+//heroku logs -n 200
+//git push heroku master
+//git add .
+//git commit -m "changes"
+
 var express = require('express');
 var router = express.Router();
 
@@ -35,13 +40,18 @@ router.post('/inbox/star', function (req, res, next) {
 
 router.post('/moveEmail', function (req, res, next) {
 
+    Object.size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
 
+    // Get the size of an object
+    var size = Object.size(req.body);
 
-    //processedIds.forEach(function(id)){
-    //Model.update({"_id": id}, {"$set": {"status": "processed" }}, callback);
-    //});
-
-    console.log(req.body.length);
+    console.log(size);
 
 
     movingEmail = function(callback){
