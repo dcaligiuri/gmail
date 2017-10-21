@@ -48,7 +48,7 @@ router.post('/moveEmail', function (req, res, next) {
         return size;
     };
 
-    function ready(goAhead){
+    function ready(){
         goAhead = goAhead + 1; 
     }
 
@@ -60,7 +60,7 @@ router.post('/moveEmail', function (req, res, next) {
     movingEmail = function(callback){
         var goAhead = 0;
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { ready(goAhead); })
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { ready(); })
         }
         console.log("goAhead " + goAhead);
         if (goAhead == size){
