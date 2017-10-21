@@ -41,6 +41,8 @@ router.post('/moveEmail', function (req, res, next) {
     //Model.update({"_id": id}, {"$set": {"status": "processed" }}, callback);
     //});
 
+    console.log(req.body.length);
+
 
     movingEmail = function(callback){
         var goAhead = 0;
@@ -48,7 +50,7 @@ router.post('/moveEmail', function (req, res, next) {
             Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { goAhead++; })
         }
         if (goAhead == req.body.length){
-            
+           callback();
         }
         
     }

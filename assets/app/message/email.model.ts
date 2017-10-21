@@ -8,7 +8,7 @@ export class Email {
                 public spam: string,
                 public timeStamp: object,
                 public labels: object,
-                public trash: string, 
+                public trash: string,
                 public messageId?: string,
                 public userId?: string
                 ) {}
