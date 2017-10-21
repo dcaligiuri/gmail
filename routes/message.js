@@ -56,7 +56,7 @@ router.post('/moveEmail', function (req, res, next) {
     movingEmail = function(callback){
         var goAhead = 0;
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { goAhead++; })
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data, goAhead) { goAhead++; })
         }
         console.log("goAhead " + goAhead);
         if (goAhead == size){
