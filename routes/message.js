@@ -61,11 +61,42 @@ router.post('/moveEmail', function (req, res, next) {
           };
 
 
-        Email.find({ "_id": { $in: arrIdToMove } }, function(err, emails){
-            console.log(emails[emails.messageId]);
+    Email.find({ _id: { $in: arrIdToMove } })
+        .update({"labels": req.body[_id]})
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: "false"
+            });
+        });
+
+/*
+        Email.find(queryCodes[req.query.oldLocation])
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
         });
 
 
+
+
+
+*/
 
 
     //Email.find({username: oldUsername}, function (err, email) {
