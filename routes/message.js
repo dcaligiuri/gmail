@@ -60,7 +60,7 @@ router.post('/moveEmail', function (req, res, next) {
           };
 
 
-        Email.find({ _id: { $in: arrIdToMove } }, function(err, emails){
+        Email.find({ "_id": { $in: arrIdToMove } }, function(err, emails){
            console.log(emails);
         });
 
