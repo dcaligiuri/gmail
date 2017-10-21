@@ -58,12 +58,13 @@ export class EmailService {
         : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
-            var tempArrPosistion = this.highlightedEmails[index].labels
-            tempArrPosistion.push(newLocation);
-            var oldPos = tempArrPosistion.indexOf(oldLocation);
-            tempArrPosistion.splice(oldPos, 1);
-            highlighted[this.highlightedEmails[index].messageId] = tempArrPosistion;
+            //var tempArrPosistion = this.highlightedEmails[index].labels
+            //tempArrPosistion.push(newLocation);
+            //var oldPos = tempArrPosistion.indexOf(oldLocation);
+            //tempArrPosistion.splice(oldPos, 1);
+            highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
+       console.log(highlighted);
        const headers = new Headers({'Content-Type': 'application/json'});
        return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + token + '&oldLocation=' + oldLocation, highlighted, {headers: headers})
             .map((response: Response) => {
