@@ -78,6 +78,7 @@ router.post('/moveEmail', function (req, res, next) {
                     error: err
                 });
             }
+            console.log(messages);
             res.status(200).json({
                 message: 'Success',
                 obj: messages
