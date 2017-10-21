@@ -62,8 +62,11 @@ router.post('/moveEmail', function (req, res, next) {
 
 
 
+          console.log(req.query.oldLocation);
+          console.log(req.query.newLocation);
 
-          Email.update( { _id: { $in: arrIdToMove } }, {$addToSet: { "labels": req.query.newLocation }, $pull: { "labels": req.query.oldLocation }} , {multi: true} 
+
+          Email.update( { _id: { $in: arrIdToMove } }, {$addToSet: { "labels": req.query.newLocation }} , {multi: true} 
         , function(err,docs) 
         { 
             Email.find(queryCodes[req.query.oldLocation])
