@@ -65,8 +65,10 @@ router.post('/moveEmail', function (req, res, next) {
 
 
         Email.find({ "_id": { $in: arrIdToMove } }, function(err, emails){
-           console.log(emails);
+            console.log(emails[emails.messageId]);
         });
+
+
 
 
     //Email.find({username: oldUsername}, function (err, email) {
