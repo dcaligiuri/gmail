@@ -197,12 +197,9 @@ export class HeaderComponent {
 
     
     markHighlightedSpam(){
-        console.log("YOU HAVE CLICKED REPORT SPAM");
-        this.emailService.markSpamHighlighted().subscribe(
-                data => {
-                    },
-                    error => console.error(error)
-            );
+        let currTab = this.emailService.getCurrentTab();
+        this.emailService.markSpamHighlighted(currTab).subscribe();
+        this.emailService.clearHighlightedEmails();
     }
 
     markHighlightedNotSpam(){
