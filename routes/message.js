@@ -222,7 +222,6 @@ router.get('/forums', function (req, res, next) {
 
 router.get('/updates', function (req, res, next) {
     var decoded = jwt.decode(req.query.token); 
-    //Email.find({"user": decoded.user._id, "spam": "false", "labels": {"$in" : ["Primary"]}})
      Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }})   
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -429,24 +428,6 @@ router.post('/trashHighlighted', function (req, res, next) {
 
         });
 
-
-/*
-    var decoded = jwt.decode(req.query.token);
-    Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
-        .populate('user', 'firstName')
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-        });
-        */
 });
 
 
@@ -510,17 +491,6 @@ router.post('/markAsSpamHighlighted', function (req, res, next) {
 
         });
 
-
-
-
-    //for (var key in req.body) {
-        //Email.find({ _id: req.body[key] }).update({"spam": "true"}).exec();
-    //}
-
-
-    //res.status(200).json({
-        //message: 'Success'
-    //});
         
 });
 
