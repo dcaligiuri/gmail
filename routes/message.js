@@ -48,6 +48,10 @@ router.post('/moveEmail', function (req, res, next) {
         return size;
     };
 
+    function ready(goAhead){
+        goAhead = goAhead + 1; 
+    }
+
     // Get the size of an object
     var size = Object.size(req.body);
 
@@ -56,7 +60,7 @@ router.post('/moveEmail', function (req, res, next) {
     movingEmail = function(callback){
         var goAhead = 0;
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data, goAhead) { goAhead++; })
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { ready(goAhead); })
         }
         console.log("goAhead " + goAhead);
         if (goAhead == size){
