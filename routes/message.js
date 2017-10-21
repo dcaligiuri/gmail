@@ -42,6 +42,8 @@ router.post('/moveEmail', function (req, res, next) {
 
     var arrIdToMove = [];
 
+    console.log(req.body);
+
     for (var key in req.body) {
         arrIdToMove.push(req.body[key]);  
     }
