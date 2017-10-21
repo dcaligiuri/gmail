@@ -40,6 +40,45 @@ router.post('/inbox/star', function (req, res, next) {
 
 router.post('/moveEmail', function (req, res, next) {
 
+    console.log(req.body);
+
+
+    var decoded = jwt.decode(req.query.token);
+    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
+              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
+              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
+              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
+              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
+              'sent':{"fromEmail": decoded.user.email},
+              'spam':{"user": decoded.user._id, "spam": "true"},
+              'trash':{"user": decoded.user._id, "trash":"true"},
+              'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
+          };
+    Email.find(queryCodes[req.query.oldLocation])
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+        });
+
+
+
+
+
+
+
+
+
+/*
     Object.size = function(obj) {
         var size = 0, key;
         for (key in obj) {
@@ -47,10 +86,6 @@ router.post('/moveEmail', function (req, res, next) {
         }
         return size;
     };
-
-    function ready(goAhead){
-        goAhead = goAhead + 1; 
-    }
 
     // Get the size of an object
     var size = Object.size(req.body);
@@ -60,9 +95,9 @@ router.post('/moveEmail', function (req, res, next) {
     movingEmail = function(callback){
         var goAhead = 0;
         for (var key in req.body) {
-            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { ready(goAhead); })
+            Email.find({ _id: key }).update({"labels": req.body[key]}).exec(function (err, data) { goAhead++; })
         }
-        
+        console.log("goAhead " + goAhead);
         if (goAhead == size){
            callback();
         }
@@ -99,6 +134,8 @@ router.post('/moveEmail', function (req, res, next) {
         });
     });
 
+
+*/
     
 
 
