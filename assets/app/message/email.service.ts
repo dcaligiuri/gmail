@@ -58,10 +58,6 @@ export class EmailService {
         : '';
        var highlighted = {};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
-            //var tempArrPosistion = this.highlightedEmails[index].labels
-            //tempArrPosistion.push(newLocation);
-            //var oldPos = tempArrPosistion.indexOf(oldLocation);
-            //tempArrPosistion.splice(oldPos, 1);
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
        const headers = new Headers({'Content-Type': 'application/json'});
