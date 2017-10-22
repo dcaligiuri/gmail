@@ -261,7 +261,7 @@ router.post('/primary', function (req, res, next) {
 
 
 router.get('/social', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token); 
+    var decoded = jwt.decode(req.body.auth);
     Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }})   
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -279,7 +279,7 @@ router.get('/social', function (req, res, next) {
 });
 
 router.get('/promotions', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token); 
+    var decoded = jwt.decode(req.body.auth);
      Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }})   
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -299,7 +299,7 @@ router.get('/promotions', function (req, res, next) {
 
 
 router.get('/forums', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token); 
+    var decoded = jwt.decode(req.body.auth);
     Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }})   
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -319,7 +319,7 @@ router.get('/forums', function (req, res, next) {
 
 
 router.get('/updates', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token); 
+    var decoded = jwt.decode(req.body.auth);
      Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }})   
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -675,11 +675,7 @@ router.post('/markAllRead', function (req, res, next) {
 });
 
 
-
-
-
 router.post('/compose', function (req, res, next) {
-    console.log(req.body.email);
     User.findOne({"email": req.body.email.toEmail}, function (err, user){
         if (err) {
             return res.status(500).json({
