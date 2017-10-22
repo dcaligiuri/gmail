@@ -242,7 +242,6 @@ router.get('/search/:searchTerm', function (req, res, next) {
 
 
 router.post('/primary', function (req, res, next) {
-    console.log(req.body.auth);
     var decoded = jwt.decode(req.body.auth);
     Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
         .populate('user', 'firstName')
@@ -680,8 +679,7 @@ router.post('/markAllRead', function (req, res, next) {
 
 
 router.post('/compose', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
-    User.findOne({"email": req.body.toEmail}, function (err, user){
+    User.findOne({"email": req.body.email.toEmail}, function (err, user){
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -689,16 +687,16 @@ router.post('/compose', function (req, res, next) {
             });
         }
         var email = new Email({
-            content: req.body.content,
-            fromEmail: req.body.fromEmail,
-            toEmail: req.body.toEmail,
-            starred: req.body.starred,
-            subject: req.body.subject,
-            read: req.body.read,
-            spam: req.body.spam,
-            timeStamp: req.body.timeStamp,
-            labels: req.body.labels,
-            trash: req.body.trash, 
+            content: req.body.email.content,
+            fromEmail: req.body.email.fromEmail,
+            toEmail: req.body.email.toEmail,
+            starred: req.body.email.starred,
+            subject: req.body.email.subject,
+            read: req.body.email.read,
+            spam: req.body.email.spam,
+            timeStamp: req.body.email.timeStamp,
+            labels: req.body.email.labels,
+            trash: req.body.email.trash, 
             user: user._id
         });
 

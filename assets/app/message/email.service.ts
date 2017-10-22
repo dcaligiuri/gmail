@@ -413,11 +413,12 @@ export class EmailService {
     }
 
     addMessage(email: Email) {
-       const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
+        const body = {"auth": token, "email": email};
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/compose' + token, email, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/compose', email, {headers: headers})
             .map((response: Response) => {
                 const result = response.json();
             })
