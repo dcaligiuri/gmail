@@ -575,6 +575,7 @@ export class EmailService {
               'Authorization': 'Bearer '+token
             });
         }
+        console.log(options);
         return this.http.get('https://dansgmail.herokuapp.com/mail/' + target, options)
             .map((response: Response) => {
                 const messages = response.json().obj;
