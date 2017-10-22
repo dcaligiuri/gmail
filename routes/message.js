@@ -260,7 +260,7 @@ router.post('/primary', function (req, res, next) {
 });
 
 
-router.get('/social', function (req, res, next) {
+router.post('/social', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }})   
         .populate('user', 'firstName')
@@ -278,7 +278,7 @@ router.get('/social', function (req, res, next) {
         });
 });
 
-router.get('/promotions', function (req, res, next) {
+router.post('/promotions', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
      Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }})   
         .populate('user', 'firstName')
@@ -298,7 +298,7 @@ router.get('/promotions', function (req, res, next) {
 
 
 
-router.get('/forums', function (req, res, next) {
+router.post('/forums', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }})   
         .populate('user', 'firstName')
@@ -318,7 +318,7 @@ router.get('/forums', function (req, res, next) {
 
 
 
-router.get('/updates', function (req, res, next) {
+router.post('/updates', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
      Email.find({ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }})   
         .populate('user', 'firstName')
