@@ -418,7 +418,7 @@ export class EmailService {
         : '';
         const body = {"auth": token, "email": email};
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/compose', email, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/compose', body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json();
             })

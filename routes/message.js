@@ -679,6 +679,7 @@ router.post('/markAllRead', function (req, res, next) {
 
 
 router.post('/compose', function (req, res, next) {
+    console.log(req.body.email);
     User.findOne({"email": req.body.email.toEmail}, function (err, user){
         if (err) {
             return res.status(500).json({
