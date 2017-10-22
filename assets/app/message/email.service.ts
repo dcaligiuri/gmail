@@ -562,10 +562,20 @@ export class EmailService {
 
 
     getMessages(target: String){
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        //const token = localStorage.getItem('token') ?
+        //'?token=' + localStorage.getItem('token')
+        //: '';
+         const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
-        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
+        const options = new RequestOptions();
+            if (!options.headers) {
+            options.headers = new Headers({
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer '+token
+            });
+        }
+        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token, options)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
