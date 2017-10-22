@@ -565,18 +565,11 @@ export class EmailService {
         //const token = localStorage.getItem('token') ?
         //'?token=' + localStorage.getItem('token')
         //: '';
-         const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         ? localStorage.getItem('token')
         : '';
-        const options = new RequestOptions();
-            if (!options.headers) {
-            options.headers = new Headers({
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer '+token
-            });
-        }
-        console.log(options.headers);
-        return this.http.post('https://dansgmail.herokuapp.com/mail/' + target, options)
+        const body = {"auth": token};
+        return this.http.post('https://dansgmail.herokuapp.com/mail/' + target, body)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];

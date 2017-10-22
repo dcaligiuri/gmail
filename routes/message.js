@@ -242,7 +242,7 @@ router.get('/search/:searchTerm', function (req, res, next) {
 
 
 router.post('/primary', function (req, res, next) {
-    console.log(req.options);
+    console.log(req.body);
     var decoded = jwt.decode(req.query.token);
     Email.find({ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }})
         .populate('user', 'firstName')
