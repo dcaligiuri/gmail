@@ -61,11 +61,6 @@ export class EmailService {
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
 
-        //delete from unreadEmails
-        this.unreadEmails = this.unreadEmails.filter(function (value, index, array) {
-            return (this.highlightedEmails.includes(value) === false);
-        });
-       
 
        const headers = new Headers({'Content-Type': 'application/json'});
        return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + '?oldLocation=' + oldLocation + '&newLocation=' + newLocation , highlighted, {headers: headers})
