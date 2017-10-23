@@ -44,10 +44,12 @@ router.post('/moveEmail', function (req, res, next) {
 
 
     for (var key in req.body) {
-        if (key == 'auth'){
+        if (key != 'auth'){
             arrIdToMove.push(key);
         }
     }
+
+    console.log(arrIdToMove);
 
     var decoded = jwt.decode(req.body.auth);
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
