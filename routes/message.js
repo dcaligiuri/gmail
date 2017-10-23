@@ -44,7 +44,9 @@ router.post('/moveEmail', function (req, res, next) {
 
 
     for (var key in req.body) {
-        arrIdToMove.push(key);
+        if (key == 'auth'){
+            arrIdToMove.push(key);
+        }
     }
 
     var decoded = jwt.decode(req.body.auth);
