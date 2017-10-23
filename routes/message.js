@@ -340,7 +340,7 @@ router.post('/updates', function (req, res, next) {
 
 
 
-router.get('/starred', function (req, res, next) {
+router.post('/starred', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({"user": decoded.user._id, "starred": "true"})
         .exec(function (err, messages) {
@@ -358,7 +358,7 @@ router.get('/starred', function (req, res, next) {
 });
 
 
-router.get('/sent', function (req, res, next) {
+router.post('/sent', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({"fromEmail": decoded.user.email})
         .exec(function (err, messages) {
@@ -376,7 +376,7 @@ router.get('/sent', function (req, res, next) {
 });
 
 
-router.get('/spam', function (req, res, next) {
+router.post('/spam', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({"user": decoded.user._id, "spam": "true"})
         .populate('user', 'firstName')
@@ -394,7 +394,7 @@ router.get('/spam', function (req, res, next) {
         });
 });
 
-router.get('/trash', function (req, res, next) {
+router.post('/trash', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({"user": decoded.user._id, "trash":"true"})
         .populate('user', 'firstName')
@@ -412,7 +412,7 @@ router.get('/trash', function (req, res, next) {
         });
 });
 
-router.get('/all', function (req, res, next) {
+router.post('/all', function (req, res, next) {
     var decoded = jwt.decode(req.body.auth);
     Email.find({"user": decoded.user._id, "trash":"false", "spam":"false"})
         .populate('user', 'firstName')
