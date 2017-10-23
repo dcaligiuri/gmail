@@ -503,7 +503,9 @@ router.post('/trashHighlighted', function (req, res, next) {
 
 
     for (var key in req.body) {
-        trashThese.push(req.body[key]);  
+        if (key != 'auth'){
+            trashThese.push(req.body[key]); 
+        } 
     }
 
     Email.update( { _id: { $in: trashThese } }, {"trash":"true"} , {multi: true} 
@@ -566,7 +568,9 @@ router.post('/markAsSpamHighlighted', function (req, res, next) {
 
 
     for (var key in req.body) {
-        spamThese.push(req.body[key]);  
+        if (key != 'auth'){
+            spamThese.push(req.body[key]);  
+        }
     }
 
     Email.update( { _id: { $in: spamThese } }, {"spam":"true"} , {multi: true} 
@@ -737,9 +741,10 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
 
     for (var key in req.body) {
-        arrToUnread.push(req.body[key]);
+        if (key != 'auth'){
+            arrToUnread.push(req.body[key]);
+        }
     }
-
 
     Email.update( { _id: { $in: arrToUnread } }, {"read":false} , {multi: true} 
         , function(err,docs) 
@@ -784,7 +789,9 @@ router.post('/markAsReadHighlighted', function (req, res, next) {
           };
 
     for (var key in req.body) {
-        arrToRead.push(req.body[key]);  
+        if (key != 'auth'){
+            arrToRead.push(req.body[key]);  
+        }
     }
 
     Email.update( { _id: { $in: arrToRead } }, {"read":true} , {multi: true} 

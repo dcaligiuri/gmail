@@ -53,15 +53,15 @@ export class EmailService {
     
 
     moveEmail(newLocation: String, oldLocation: String){
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+         const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
-       var highlighted = {};
+       var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
        const headers = new Headers({'Content-Type': 'application/json'});
-       return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + token + '&oldLocation=' + oldLocation + '&newLocation=' + newLocation , highlighted, {headers: headers})
+       return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + '&oldLocation=' + oldLocation + '&newLocation=' + newLocation , highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 console.log(messages);
@@ -182,7 +182,10 @@ export class EmailService {
     }
 
     markNotSpamHighlighted(){
-       var highlighted = {};
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
+        : '';
+       var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
@@ -326,19 +329,18 @@ export class EmailService {
 
 
     markReadHighlighted(target: string){
-       const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
         '&target=' + target
         : '';
-       var highlighted = {};
+       var highlighted = {'auth': token };
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
-
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsReadHighlighted' + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 console.log(messages);
@@ -371,18 +373,18 @@ export class EmailService {
 
 
     markUnreadHighlighted(target: string){
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
         '&target=' + target
         : '';
-       var highlighted = {};
+       var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsUnreadHighlighted' + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
