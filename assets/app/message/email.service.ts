@@ -60,6 +60,7 @@ export class EmailService {
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
+
        const headers = new Headers({'Content-Type': 'application/json'});
        return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + '?oldLocation=' + oldLocation + '&newLocation=' + newLocation , highlighted, {headers: headers})
             .map((response: Response) => {
@@ -422,7 +423,9 @@ export class EmailService {
         const headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('https://dansgmail.herokuapp.com/mail/compose', body, {headers: headers})
             .map((response: Response) => {
-                const result = response.json();
+                const messages = response.json().obj;
+                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
+                this.emails.push(transformedMessage);
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
