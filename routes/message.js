@@ -47,7 +47,7 @@ router.post('/moveEmail', function (req, res, next) {
         arrIdToMove.push(key);
     }
 
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.body.auth);
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
               'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
@@ -61,11 +61,6 @@ router.post('/moveEmail', function (req, res, next) {
           };
 
 
-
-          console.log(req.query.oldLocation);
-          console.log(req.query.newLocation);
-
-//$pull: { "labels": req.query.oldLocation }, 
           Email.update( { _id: { $in: arrIdToMove } }, {$addToSet: { "labels": req.query.newLocation } } , {multi: true} 
         , function(err,docs) 
         { 
