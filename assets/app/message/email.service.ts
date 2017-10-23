@@ -198,18 +198,18 @@ export class EmailService {
     }
 
     markSpamHighlighted(target: string){
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
-        '&target=' + target
+        '?target=' + target
         : '';
-       var highlighted = {};
+       var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsSpamHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/markAsSpamHighlighted' + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
@@ -258,18 +258,18 @@ export class EmailService {
     }
 
     trashHighlightedEmails(target: string){
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
-        '&target=' + target
+        '?target=' + target
         : '';
-       var highlighted = {};
+       var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[index] = this.highlightedEmails[index].messageId;
         }
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/trashHighlighted' + token + modifiedTarget, highlighted, {headers: headers})
+        return this.http.post('https://dansgmail.herokuapp.com/mail/trashHighlighted' + modifiedTarget, highlighted, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
