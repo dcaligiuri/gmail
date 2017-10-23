@@ -485,7 +485,7 @@ router.post('/changeLabelHighlighted', function (req, res, next) {
 router.post('/trashHighlighted', function (req, res, next) {
 
 
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.body.auth);
     var trashThese = [];
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
@@ -550,7 +550,7 @@ router.post('/deleteHighlighted', function (req, res, next) {
 
 router.post('/markAsSpamHighlighted', function (req, res, next) {
 
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.body.auth);
     var spamThese = [];
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
@@ -725,7 +725,7 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
     var arrToUnread = [];
 
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.body.auth);
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
               'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
               'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
@@ -772,7 +772,7 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.body.auth);
     var arrToRead = [];
 
     var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
