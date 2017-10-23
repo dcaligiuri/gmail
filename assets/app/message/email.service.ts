@@ -60,7 +60,6 @@ export class EmailService {
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
-       console.log(highlighted);
        const headers = new Headers({'Content-Type': 'application/json'});
        return this.http.post('https://dansgmail.herokuapp.com/mail/moveEmail' + '?oldLocation=' + oldLocation + '&newLocation=' + newLocation , highlighted, {headers: headers})
             .map((response: Response) => {
@@ -334,7 +333,7 @@ export class EmailService {
         ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
-        '&target=' + target
+        '?target=' + target
         : '';
        var highlighted = {'auth': token };
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
@@ -378,7 +377,7 @@ export class EmailService {
         ? localStorage.getItem('token')
         : '';
         const modifiedTarget = target ?
-        '&target=' + target
+        '?target=' + target
         : '';
        var highlighted = {'auth': token};
        for (var index = 0; index < this.highlightedEmails.length; index++) { 
