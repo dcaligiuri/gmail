@@ -712,7 +712,7 @@ router.post('/compose', function (req, res, next) {
             user.save();
             res.status(201).json({
                 email: 'Saved message',
-                obj: result
+                obj: user.messages
             });
         });
     });

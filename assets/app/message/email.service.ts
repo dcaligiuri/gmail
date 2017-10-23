@@ -424,9 +424,29 @@ export class EmailService {
         return this.http.post('https://dansgmail.herokuapp.com/mail/compose', body, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
-                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
-                console.log(transformedMessage);
-                //this.emails.push(transformedMessage);
+                let transformedMessages: Email[] = [];
+                for (let message of messages) {
+                    transformedMessages.push(new Email(
+                        message.content,
+                        message.fromEmail,
+                        message.toEmail,
+                        message.starred,
+                        message.subject,
+                        message.read,
+                        message.spam,
+                        message.timeStamp,
+                        message.labels,
+                        message.trash,
+                        message._id
+                    ));
+                }
+                    this.unreadEmails = transformedMessages;
+
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+
+                return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
