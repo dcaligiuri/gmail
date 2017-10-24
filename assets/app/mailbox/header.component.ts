@@ -31,8 +31,6 @@ export class HeaderComponent {
 
     ngOnInit(){
 
-        //console.log(this.startInboxPos);
-        //console.log(this.endInboxPos);
 
         this.myOptions = [
             { id: 1, name: 'Updates' },
@@ -226,7 +224,7 @@ export class HeaderComponent {
 
     markHighlightedRead(){
         let currTab = this.emailService.getCurrentTab();
-        console.log(currTab);
+        //console.log(currTab);
         this.emailService.markReadHighlighted(currTab).subscribe();
 
         //this.emailService.getMessages(currTab).subscribe();
