@@ -178,6 +178,7 @@ public currentPath: string;
                 return urlseg[1].path;
             }
             else if(urlseg[1].path === 'search'){
+                return this.searchTerm;
                 //let searchTerm = urlseg[2].path
                 //this.emailService.getMessages('starred')
                  //   .subscribe(
