@@ -39,7 +39,7 @@ export class AutocompleteComponent {
     } 
 
     readEmail(event: any){
-      if (event.originalObject !== null){
+      if (event !== null){
         this.router.navigate(['', event.originalObject.messageId]); 
       }
       
