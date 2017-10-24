@@ -38,14 +38,7 @@ public currentPath: string;
       
         this.sub = this.route.params.subscribe(params => {
         this.searchTerm = params['searchTerm']; 
-        //this.emailService.searchMessages(this.searchTerm)
-                   // .subscribe(
-                     //  (messages: Email[]) => {
-                   //         this.messages = messages;
-                   //     }
-                   // );
-        //
-
+   
     });
 
         this.subscription = this.emailService.upp$
@@ -154,9 +147,10 @@ public currentPath: string;
                     );
 
             }
+
             else if(urlseg[1].path === 'search'){
                 let searchTerm = urlseg[2].path
-                this.emailService.getMessages('starred')
+                this.emailService.searchMessages(this.searchTerm)
                     .subscribe(
                         (messages: Email[]) => {
                             this.messages = messages;
