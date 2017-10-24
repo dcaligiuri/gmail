@@ -55,10 +55,10 @@ export class HeaderComponent {
 
 
     showEmailsInService(){
-        console.log(this.emailService.emails);
+        //console.log(this.emailService.emails);
     }
     showHighlightedEmailsInService(){
-        console.log(this.emailService.highlightedEmails);
+        //console.log(this.emailService.highlightedEmails);
     }
 
     delHighlighted(){
@@ -234,7 +234,7 @@ export class HeaderComponent {
 
     markHighlightedUnread(){
         let currTab = this.emailService.getCurrentTab();
-        console.log(currTab);
+        //console.log(currTab);
         this.emailService.markUnreadHighlighted(currTab).subscribe();
         //this.emailService.getMessages(currTab).subscribe();
         this.emailService.clearHighlightedEmails();
