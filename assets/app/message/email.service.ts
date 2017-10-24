@@ -710,10 +710,11 @@ export class EmailService {
  */
 
     getMessagesForSearch(target: String) {
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
-        return this.http.get('https://dansgmail.herokuapp.com/mail/' + target + token)
+        const body = {"auth": token};
+        return this.http.post('https://dansgmail.herokuapp.com/mail/' + target, body)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];

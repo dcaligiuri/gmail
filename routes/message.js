@@ -220,8 +220,8 @@ router.post('/inbox/unstar', function (req, res, next) {
 });
 
 
-router.get('/search/:searchTerm', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
+router.post('/search/:searchTerm', function (req, res, next) {
+    var decoded = jwt.decode(req.body.auth);
     var searchTerm = req.params.searchTerm;
     Email.find( { "user": decoded.user._id, $or:[ { "content": { "$regex": searchTerm, "$options": "i" }}, { "fromEmail": { "$regex": searchTerm, "$options": "i" }}, { "toEmail": { "$regex": searchTerm, "$options": "i" }}, { "subject": { "$regex": searchTerm, "$options": "i" }} ]})
         .populate('user', 'firstName')
