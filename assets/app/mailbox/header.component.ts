@@ -68,6 +68,12 @@ export class HeaderComponent {
         this.emailService.deleteHighlighted(currTab).subscribe();
     }
 
+    onTrashTab(){
+        let currTab = this.emailService.getCurrentTab();
+        if (currTab === 'trash'){
+            return true; 
+        }
+    }
 
 
     changeThickness(event: any, thickness: string){
