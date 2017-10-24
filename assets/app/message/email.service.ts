@@ -574,6 +574,10 @@ export class EmailService {
                         message._id
                     ));
                 }
+                this.emails = transformedMessages.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+
                 return transformedMessages.reverse();
             })
             .catch((error: Response) => Observable.throw(error.json()));
