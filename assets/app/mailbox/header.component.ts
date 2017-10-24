@@ -73,6 +73,7 @@ export class HeaderComponent {
         if (currTab === 'trash'){
             return true; 
         }
+        return false; 
     }
 
 
