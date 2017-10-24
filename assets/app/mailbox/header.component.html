@@ -49,8 +49,8 @@
 <span *ngIf="onSelected()"> 
         <button><span class="glyphicon glyphicon-download-alt" data-toggle="tooltip" title="Archive" aria-hidden="true"></span></button>
         <button (click)="markHighlightedSpam()"><span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" title="Report Spam" aria-hidden="true"></span></button>
-        <button *ngIf="onTrashTab()" (click)="trashHighlightedMess()"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete" aria-hidden="true"></span></button>
-        <button (click)="delHighlighted()">PERMANENTLY DELETE</button>
+        <button (click)="trashHighlightedMess()"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete" aria-hidden="true"></span></button>
+        <button *ngIf="onTrashTab()" (click)="delHighlighted()">PERMANENTLY DELETE</button>
         <div class="btn-group" dropdown>
           <button dropdownToggle type="button" class="btn dropdown-toggle">
             <span class="glyphicon glyphicon-folder-close" data-toggle="tooltip" title="Move To" aria-hidden="true"><span class="caret"></span></span>
