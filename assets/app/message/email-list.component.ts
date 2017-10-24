@@ -38,13 +38,13 @@ public currentPath: string;
       
         this.sub = this.route.params.subscribe(params => {
         this.searchTerm = params['searchTerm']; 
-        this.emailService.searchMessages(this.searchTerm)
-                    .subscribe(
-                       (messages: Email[]) => {
-                            this.messages = messages;
-                        }
-                    );
-        
+        //this.emailService.searchMessages(this.searchTerm)
+                   // .subscribe(
+                     //  (messages: Email[]) => {
+                   //         this.messages = messages;
+                   //     }
+                   // );
+        //
 
     });
 
