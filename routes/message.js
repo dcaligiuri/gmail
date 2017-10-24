@@ -533,13 +533,55 @@ router.post('/trashHighlighted', function (req, res, next) {
 router.post('/deleteHighlighted', function (req, res, next) {
 
 
+    var decoded = jwt.decode(req.body.auth);
+    var deleteThese = [];
+
+    var queryCodes = {'starred':{"user": decoded.user._id, "starred": "true"},
+              'primary':{ "user": decoded.user._id, "spam": "false", "trash":"false", "labels" : { $in: [ "primary" ] }},
+              'social':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "social" ] }},
+              'promotions':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "promotions" ] }},
+              'updates':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "updates" ] }},
+              'forums':{ "user": decoded.user._id, "trash":"false", "spam": "false", "labels" : { $in: [ "forums" ] }},
+              'sent':{"fromEmail": decoded.user.email},
+              'spam':{"user": decoded.user._id, "spam": "true"},
+              'trash':{"user": decoded.user._id, "trash":"true"},
+              'all':{"user": decoded.user._id, "trash":"false", "spam":"false"}
+          };
+
+
     for (var key in req.body) {
-        Email.find({ _id: req.body[key] }).remove().exec();
+        if (key != 'auth'){
+            deleteThese.push(req.body[key]); 
+        } 
     }
 
-    res.status(200).json({
-        message: 'Success'
-    });
+    Email.remove( { _id: { $in: deleteThese } } 
+        , function(err,docs) 
+        { 
+            Email.find(queryCodes[req.query.target])
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
+        });
+
+        });
+
+   //for (var key in req.body) {
+       // Email.find({ _id: req.body[key] }).remove().exec();
+    //}
+
+    //res.status(200).json({
+      //  message: 'Success'
+  //  });
 
 
 });

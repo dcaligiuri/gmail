@@ -63,6 +63,11 @@ export class HeaderComponent {
         console.log(this.emailService.highlightedEmails);
     }
 
+    delHighlighted(){
+        let currTab = this.emailService.getCurrentTab();
+        this.emailService.deleteHighlighted(currTab).subscribe();
+    }
+
 
 
     changeThickness(event: any, thickness: string){
