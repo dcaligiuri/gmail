@@ -39,7 +39,10 @@ export class AutocompleteComponent {
     } 
 
     readEmail(event: any){
-      this.router.navigate(['', event.originalObject.messageId]); 
+      if (event.originalObject){
+        this.router.navigate(['', event.originalObject.messageId]); 
+      }
+      
     }
 }
 
