@@ -551,10 +551,11 @@ export class EmailService {
  
 
     searchMessages(searchFor: string) {
-        const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
+        const token = localStorage.getItem('token')
+        ? localStorage.getItem('token')
         : '';
-        return this.http.get(`https://dansgmail.herokuapp.com/mail/search/${searchFor}` + token)
+        const body = {"auth": token};
+        return this.http.post(`https://dansgmail.herokuapp.com/mail/search/${searchFor}` , body)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Email[] = [];
