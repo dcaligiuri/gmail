@@ -49,9 +49,9 @@ export class HeaderComponent {
         });
 
 
-        this.any = this.activatedRoute.url.subscribe(params => {
-            console.log(params);
-        });
+        //this.any = this.activatedRoute.url.subscribe(params => {
+            //console.log(params);
+        //});
         
     }
 
