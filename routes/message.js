@@ -814,6 +814,10 @@ router.post('/markAsUnreadHighlighted', function (req, res, next) {
 
 router.post('/markAsReadHighlighted', function (req, res, next) {
 
+    //addy = "left/right";
+//var streetaddress= addy.substr(0, addy.indexOf('/')); 
+//console.log(streetaddress);
+
     var decoded = jwt.decode(req.body.auth);
     var arrToRead = [];
 
