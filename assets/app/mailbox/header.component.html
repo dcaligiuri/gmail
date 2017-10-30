@@ -43,7 +43,42 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <button><input type="checkbox"><i class="icon-check-empty"></i> <span class="caret"></span></button>
+
+
+        <div class="btn-group" dropdown>
+          <button><input type="checkbox"><i class="icon-check-empty"></i> <span class="caret"></span></button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+             <div class="form-group has-feedback">
+              <label class="control-label">Move to:</label>
+              <input type="text" class="form-control"/>
+              <i class="glyphicon glyphicon-search form-control-feedback"></i>
+            </div>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('social')">Social</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('promotions')">Promotions</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('updates')">Updates</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="moveTo('forums')">Forums</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a (click)="markHighlightedSpam()" class="dropdown-item" href="#">Spam</a></li>
+            <li role="menuitem"><a (click)="deleteHighlightedMess()" class="dropdown-item" href="#">Trash</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Create New</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Manage Labels</a>
+            </li>
+          </ul>
+  
+
+        </div>
+
+        
+        
+
+
+
+
+
+
+
+
         <button (click)="refresh()"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
 
 <span *ngIf="onSelected()"> 
