@@ -54,6 +54,11 @@ export class HeaderComponent {
     }
 
 
+    refresh(): void {
+        window.location.reload();
+    }    
+
+
     showEmailsInService(){
         //console.log(this.emailService.emails);
     }
