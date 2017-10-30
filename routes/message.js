@@ -42,11 +42,15 @@ router.post('/moveEmail', function (req, res, next) {
 
     var arrIdToMove = [];
 
-
     for (var key in req.body) {
         if (key != 'auth'){
             arrIdToMove.push(key);
         }
+    }
+
+    //don't change anything if 
+    if (req.query.oldLocation === req.query.newLocation){
+        arrIdToMove = [];
     }
 
 
