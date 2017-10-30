@@ -53,6 +53,12 @@ export class EmailService {
     
 
     moveEmail(newLocation: String, oldLocation: String){
+
+        if (newLocation === oldLocation ) {
+            return null; 
+        }
+
+
          const token = localStorage.getItem('token')
         ? localStorage.getItem('token')
         : '';
