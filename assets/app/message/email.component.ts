@@ -21,7 +21,6 @@ import { EmailService } from './email.service';
 
 export class EmailComponent implements OnInit {
 
-    //div {  height:3vh;}
 showDropdown = false; 
 
 emailThickness: string; 
@@ -32,7 +31,6 @@ emailThickness: string;
 @Input() isRead: string;
 @Input() timeStamp: string;
 subscription: any; 
-//@Input() beast: string; 
 
     constructor(private emailService: EmailService) {
 

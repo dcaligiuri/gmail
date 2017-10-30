@@ -117,6 +117,17 @@ export class HeaderComponent {
 
 
 
+
+    highlightAll(){
+        let selectedEmails = [];
+        for (let x = this.startInboxPos; x <= this.endInboxPos; x++){
+            selectedEmails.push(this.emailService.emails[x]);
+        }
+        console.log(selectedEmails);
+    }
+
+
+
    changeLabelHighlighted(){
        let selected = [];
         for (let higlightedEmails of this.optionsModel) {
