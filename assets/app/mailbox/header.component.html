@@ -21,7 +21,7 @@
         <button [routerLink]="['/mail/search', searchBox]" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><input type="checkbox"><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></a></li>
         <li><a href="#"><span class="glyphicon glyphicon-bell
 " aria-hidden="true"></span></a></li>
         <button (click)="logout()">Logout</button>
@@ -43,7 +43,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <button><i class="icon-check-empty"></i> <span class="caret"></span></button>
+        <button><input type="checkbox"><i class="icon-check-empty"></i> <span class="caret"></span></button>
         <button (click)="refresh()"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
 
 <span *ngIf="onSelected()"> 
