@@ -44,7 +44,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <button><i class="icon-check-empty"></i> <span class="caret"></span></button>
-        <button click="location.reload();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
+        <button (click)="location.reload()"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
 
 <span *ngIf="onSelected()"> 
         <button><span class="glyphicon glyphicon-download-alt" data-toggle="tooltip" title="Archive" aria-hidden="true"></span></button>
