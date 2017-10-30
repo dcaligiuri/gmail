@@ -61,6 +61,11 @@ export class EmailService {
             highlighted[this.highlightedEmails[index].messageId] = this.highlightedEmails[index].labels;
        }
 
+
+       console.log("OLD LOC" + oldLocation);
+       console.log("NEW LOC" + newLocation);
+
+
        //let newUnread = [];
        //for (var index = 0; index < this.highlightedEmails.length; index++) { 
             //if (this.unreadEmails.includes(this.highlightedEmails[index]) === false){
