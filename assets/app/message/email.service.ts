@@ -478,9 +478,6 @@ export class EmailService {
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
-                //console.log(transformedMessage)
-                this.emails.push(transformedMessage);
-                console.log(this.emails);
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
