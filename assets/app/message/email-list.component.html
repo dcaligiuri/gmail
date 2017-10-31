@@ -3,7 +3,7 @@
 
 	<div *ngIf="lower - 1 <= i && i < upper">
         <app-email 
-                [message]="message" [messageId]="message.messageId" [isStarred]="message.starred" [isRead]="message.read" [timeStamp]="message.timeStamp"
+                [message]="message" [isChecked]="message.isChecked" [messageId]="message.messageId" [isStarred]="message.starred" [isRead]="message.read" [timeStamp]="message.timeStamp"
         ></app-email>
     </div>
 

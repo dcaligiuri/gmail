@@ -124,7 +124,6 @@ export class HeaderComponent {
             if (this.emailService.emails[x] !== undefined){
                 selectedEmails.push(this.emailService.emails[x]);
             }
-            
         }
     }
 
