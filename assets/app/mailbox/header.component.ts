@@ -119,10 +119,9 @@ export class HeaderComponent {
 
 
     highlightAll(){
-        let selectedEmails = [];
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
-                selectedEmails.push(this.emailService.emails[x]);
+                this.emailService.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
