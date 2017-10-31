@@ -120,9 +120,12 @@ export class HeaderComponent {
 
     highlightAll(){
         let selectedEmails = [];
-        for (let x = this.emailService.lowerLimit; x <= this.emailService.upperLimit; x++){
-            selectedEmails.push(this.emailService.emails[x]);
-        }
+
+        console.log(this.startInboxPos);
+        console.log(this.endInboxPos);
+        //for (let x = this.emailService.lowerLimit; x <= this.emailService.upperLimit; x++){
+            //selectedEmails.push(this.emailService.emails[x]);
+        //}
         console.log(selectedEmails);
     }
 
