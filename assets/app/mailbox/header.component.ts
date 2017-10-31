@@ -120,7 +120,7 @@ export class HeaderComponent {
 
     highlightAll(){
         let selectedEmails = [];
-        for (let x = this.startInboxPos; x <= this.endInboxPos; x++){
+        for (let x = this.emailService.lowerLimit; x <= this.emailService.upperLimit; x++){
             selectedEmails.push(this.emailService.emails[x]);
         }
         console.log(selectedEmails);
@@ -144,15 +144,15 @@ export class HeaderComponent {
     //}
 
     getRangeEmails(){
-        //let displayEndPos = this.endInboxPos;
-        //let displayStartPos = this.startInboxPos;
+        let displayEndPos = this.endInboxPos;
+        let displayStartPos = this.startInboxPos;
         if (this.displayCurrentComponentEmailsCount() === 0){
-            this.startInboxPos = 0; 
+            displayStartPos = 0; 
         }
         if (this.endInboxPos > this.displayCurrentComponentEmailsCount()){
-            this.endInboxPos = this.displayCurrentComponentEmailsCount();
+            displayEndPos = this.displayCurrentComponentEmailsCount();
         }
-        return this.startInboxPos.toString() + '-' + this.endInboxPos.toString();
+        return displayStartPos.toString() + '-' + displayEndPos.toString();
     }
 
     updateSearchHeader(event: any){
