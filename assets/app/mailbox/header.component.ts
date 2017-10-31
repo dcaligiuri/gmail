@@ -144,15 +144,15 @@ export class HeaderComponent {
     //}
 
     getRangeEmails(){
-        let displayEndPos = this.endInboxPos;
-        let displayStartPos = this.startInboxPos;
+        //let displayEndPos = this.endInboxPos;
+        //let displayStartPos = this.startInboxPos;
         if (this.displayCurrentComponentEmailsCount() === 0){
-            displayStartPos = 0; 
+            this.startInboxPos = 0; 
         }
         if (this.endInboxPos > this.displayCurrentComponentEmailsCount()){
-            displayEndPos = this.displayCurrentComponentEmailsCount();
+            this.endInboxPos = this.displayCurrentComponentEmailsCount();
         }
-        return displayStartPos.toString() + '-' + displayEndPos.toString();
+        return this.startInboxPos.toString() + '-' + this.endInboxPos.toString();
     }
 
     updateSearchHeader(event: any){
