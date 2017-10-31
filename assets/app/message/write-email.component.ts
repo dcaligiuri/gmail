@@ -22,6 +22,7 @@ export class WriteEmailComponent {
                     data => console.log(data),
                     error => console.error(error)
                 );
+       this.router.navigateByUrl('#');
     }
 
 
