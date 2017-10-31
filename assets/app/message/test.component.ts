@@ -26,9 +26,9 @@ export class MyContextMenuClass {
 	}
 
   
-  public items = [
-      { name: 'John', otherProperty: 'Foo' },
-      { name: 'Joe', otherProperty: 'Bar' }
-  ];
-  @ViewChild(EmailComponent) public basicMenu: EmailComponent;
+  //public items = [
+  //    { name: 'John', otherProperty: 'Foo' },
+  //    { name: 'Joe', otherProperty: 'Bar' }
+ // ];
+ /// @ViewChild(EmailComponent) public basicMenu: EmailComponent;
 }
