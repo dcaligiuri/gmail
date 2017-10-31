@@ -94,6 +94,8 @@ subscription: any;
 
 
     triggerUpdate(event: any){
+        console.log(event);
+        console.log(event.target);
         this.isChecked = event.target.checked;
         if (this.isChecked === true){
             this.emailService.pushHighlighted(this.message);
