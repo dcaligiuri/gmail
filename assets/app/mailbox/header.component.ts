@@ -124,6 +124,7 @@ export class HeaderComponent {
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
             }
         }
+        console.log(this.emailService.getHighlightedEmails());
     }
 
 
