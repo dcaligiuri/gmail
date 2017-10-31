@@ -126,7 +126,6 @@ export class HeaderComponent {
             }
             
         }
-        console.log(selectedEmails);
     }
 
 
