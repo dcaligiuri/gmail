@@ -478,6 +478,11 @@ export class EmailService {
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
+                this.emails.push(transformedMessage);
+                this.emails = this.emails.sort(function(a, b) {
+                    return (a.timeStamp < b.timeStamp) ? -1 : ((a.timeStamp > b.timeStamp) ? 1 : 0);
+                });
+
             })
             .catch((error: Response) => Observable.throw(error.json()));
     }
