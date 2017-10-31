@@ -123,7 +123,7 @@ export class HeaderComponent {
 
         //console.log(this.startInboxPos);
         //console.log(this.endInboxPos);
-        for (let x = this.startInboxPos - 1; x <= this.endInboxPos; x++){
+        for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             selectedEmails.push(this.emailService.emails[x]);
         }
         console.log(selectedEmails);
