@@ -741,7 +741,8 @@ router.post('/compose', function (req, res, next) {
             spam: req.body.email.spam,
             timeStamp: req.body.email.timeStamp,
             labels: req.body.email.labels,
-            trash: req.body.email.trash, 
+            trash: req.body.email.trash,
+            isChecked: req.body.email.isChecked,
             user: user._id
         });
 
