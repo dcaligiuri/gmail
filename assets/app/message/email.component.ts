@@ -39,6 +39,9 @@ subscription: any;
     ngOnInit(){
 
 
+        console.log(this.isChecked);
+
+
         this.subscription = this.emailService.thickness$
             .subscribe(serviceThickness => this.emailThickness = serviceThickness);
 
