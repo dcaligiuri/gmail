@@ -27,7 +27,7 @@ emailThickness: string;
 @Input() message: Email;
 @Input() isStarred: string;
 @Input() messageId: string;
-@Input() isChecked: string;
+@Input() isChecked: Boolean;
 @Input() isRead: string;
 @Input() timeStamp: string;
 subscription: any; 
