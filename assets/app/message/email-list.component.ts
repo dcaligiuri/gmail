@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Email } from './email.model';
 import { EmailService } from './email.service';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';

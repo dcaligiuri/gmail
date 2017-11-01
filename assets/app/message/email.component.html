@@ -1,4 +1,12 @@
+<!--
 <div (dragstart)="onDragStart($event, message)" [contextMenu]="basicMenu" draggable="true" [ngClass]="[isChecked === true ? 'highlighted' : '', isRead === 'true' ? 'read-email' : '', emailThickness]">
+	<input type="checkbox" [(ngModel)]="isChecked" (change)="triggerUpdate($event)" />
+	<button (click)="toggleStarred($event)" class="btn-link btn"><span class="glyphicon" [ngClass]="[message.starred === 'true' ? 'glyphicon-star' : 'glyphicon-star-empty']" aria-hidden="true"></span></button><a [routerLink]="message.messageId"><span class="text-left">{{message.fromEmail}}</span><span class="text-center">{{message.subject}} - {{message.content}}</span><span class="pull-right">{{modifiedDate()}}</span></a>
+</div>
+
+-->
+
+<div (dragstart)="onDragStart($event, message)" draggable="true" [ngClass]="[isChecked === true ? 'highlighted' : '', isRead === 'true' ? 'read-email' : '', emailThickness]">
 	<input type="checkbox" [(ngModel)]="isChecked" (change)="triggerUpdate($event)" />
 	<button (click)="toggleStarred($event)" class="btn-link btn"><span class="glyphicon" [ngClass]="[message.starred === 'true' ? 'glyphicon-star' : 'glyphicon-star-empty']" aria-hidden="true"></span></button><a [routerLink]="message.messageId"><span class="text-left">{{message.fromEmail}}</span><span class="text-center">{{message.subject}} - {{message.content}}</span><span class="pull-right">{{modifiedDate()}}</span></a>
 </div>
