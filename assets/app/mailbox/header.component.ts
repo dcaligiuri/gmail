@@ -58,6 +58,10 @@ export class HeaderComponent {
         window.location.reload();
     }
 
+    outputSerEmails(){
+        console.log(this.emailService.emails);
+    }
+
 
 
 
