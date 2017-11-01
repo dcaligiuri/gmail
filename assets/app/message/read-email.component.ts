@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReadEmailComponent implements OnInit {
 
-  public email: Email = new Email('', '', '', false, '', false, 'false', new Date(), ["primary"], "false", "false");
+  public email: Email = new Email('', '', '', false, '', false, 'false', new Date(), ["primary"], "false", false);
 	id: string;
   private sub: any;
 

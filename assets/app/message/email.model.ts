@@ -9,7 +9,7 @@ export class Email {
                 public timeStamp: object,
                 public labels: object,
                 public trash: string,
-                public isChecked: string, 
+                public isChecked: boolean, 
                 public messageId?: string,
                 public userId?: string
                 ) {}

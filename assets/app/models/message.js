@@ -14,7 +14,7 @@ var schema = new Schema({
     timeStamp: {type: Date, required: true},
     labels: {type: Object, required: true},
     trash: {type: String, required: true},
-    isChecked: {type: String, required: true},
+    isChecked: {type: Boolean, required: true},
     user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
