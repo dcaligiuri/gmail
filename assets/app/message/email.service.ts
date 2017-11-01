@@ -90,6 +90,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -237,6 +238,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -297,6 +299,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -368,6 +371,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -411,6 +415,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -454,6 +459,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -477,7 +483,7 @@ export class EmailService {
         return this.http.post('https://dansgmail.herokuapp.com/mail/compose', body, {headers: headers})
             .map((response: Response) => {
                 const messages = response.json().obj;
-                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
+                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash, messages.isChecked);
                 this.emails.push(transformedMessage);
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -487,7 +493,7 @@ export class EmailService {
        return this.http.get(`https://dansgmail.herokuapp.com/mail/${messageId}`)
             .map((response: Response) => {
                 const messages = response.json().obj;
-                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash);
+                let transformedMessage: Email = new Email(messages.content, messages.fromEmail, messages.toEmail, messages.starred, messages.subject, messages.read, messages.spam, new Date(), ["primary"], messages.trash, messages.isChecked);
                 return transformedMessage;
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -568,6 +574,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -649,6 +656,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -732,6 +740,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }
@@ -761,6 +770,7 @@ export class EmailService {
                         message.timeStamp,
                         message.labels,
                         message.trash,
+                        message.isChecked,
                         message._id
                     ));
                 }

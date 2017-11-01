@@ -16,7 +16,7 @@ export class WriteEmailComponent {
 
    onSubmit(form: NgForm) {
    	
-     const email = new Email(form.value.body, localStorage.getItem('loggedEmail'), form.value.to, false, form.value.subject, false, "false", new Date(), ["primary"], "false");
+     const email = new Email(form.value.body, localStorage.getItem('loggedEmail'), form.value.to, false, form.value.subject, false, "false", new Date(), ["primary"], "false", "false");
             this.emailService.addMessage(email)
                 .subscribe(
                     data => console.log(data),
