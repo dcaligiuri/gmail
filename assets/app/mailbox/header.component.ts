@@ -154,7 +154,9 @@ export class HeaderComponent {
 
     highlightUnread(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            this.emailService.emails[x].isChecked = false; 
+            if (this.emailService.emails[x] !== undefined){
+                this.emailService.emails[x].isChecked = false; 
+            }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'false' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
@@ -164,7 +166,9 @@ export class HeaderComponent {
 
     highlightStarred(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            this.emailService.emails[x].isChecked = false; 
+            if (this.emailService.emails[x] !== undefined){
+                this.emailService.emails[x].isChecked = false; 
+            }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'true' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
@@ -175,7 +179,9 @@ export class HeaderComponent {
 
     highlightUnstarred(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            this.emailService.emails[x].isChecked = false; 
+            if (this.emailService.emails[x] !== undefined){
+                this.emailService.emails[x].isChecked = false; 
+            }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'false' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
