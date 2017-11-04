@@ -134,6 +134,7 @@ export class HeaderComponent {
 
     highlightRead(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
+            this.emailService.removeNotHighlighted(this.emailService.emails[x]);
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'true' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
