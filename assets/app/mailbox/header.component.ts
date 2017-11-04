@@ -141,6 +141,17 @@ export class HeaderComponent {
         }
     }
 
+
+    highlightNone(){
+        for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
+            if (this.emailService.emails[x] !== undefined){
+                this.emailService.emails[x].isChecked = false;
+                this.emailService.removeNotHighlighted(this.emailService.emails[x]);
+            }
+        }
+    }
+
+
     highlightUnread(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'false' ){
@@ -149,7 +160,6 @@ export class HeaderComponent {
             }
         }
     }
-
 
     highlightStarred(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
