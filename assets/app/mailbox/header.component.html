@@ -49,7 +49,7 @@
 
           <ul *dropdownMenu class="dropdown-menu" role="menu">
             <li role="menuitem"><a (click)="highlightAll()" class="dropdown-item">All</a></li>
-            <li role="menuitem"><a class="dropdown-item">None</a></li>
+            <li role="menuitem"><a (click)="highlightNone()" class="dropdown-item">None</a></li>
             <li role="menuitem"><a (click)="highlightRead()" class="dropdown-item">Read</a></li>
             <li role="menuitem"><a (click)="highlightUnread()" class="dropdown-item">Unread</a></li>
             <li role="menuitem"><a (click)="highlightStarred()" class="dropdown-item">Starred</a></li>
