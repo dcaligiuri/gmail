@@ -133,9 +133,7 @@ export class HeaderComponent {
 
 
     highlightRead(){
-        console.log("called highlight read");
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            console.log(this.emailService.emails[x]);
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'true' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
@@ -145,7 +143,7 @@ export class HeaderComponent {
 
     highlightUnread(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === false ){
+            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'false' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
             }
@@ -155,7 +153,7 @@ export class HeaderComponent {
 
     highlightStarred(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === false ){
+            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'false' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
             }
@@ -165,7 +163,7 @@ export class HeaderComponent {
 
     highlightUnstarred(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === false ){
+            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'false' ){
                 this.emailService.emails[x].isChecked = true;
                 this.emailService.highlightedEmails.push(this.emailService.emails[x]);
             }
