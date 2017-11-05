@@ -185,16 +185,16 @@ export class EmailService {
 
     markAllRead(){
         console.log("HELLO");
-         const token = localStorage.getItem('token') ?
-        '?token=' + localStorage.getItem('token')
-        : '';
-        const body = {};
-        const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://dansgmail.herokuapp.com/mail/markAllRead' + token, body, {headers: headers})
-            .map((response: Response) => {
-                const result = response;
-            })
-            .catch((error: Response) => Observable.throw(error.json()));
+        // const token = localStorage.getItem('token') ?
+       // '?token=' + localStorage.getItem('token')
+       /// : '';
+       /// const body = {};
+       // const headers = new Headers({'Content-Type': 'application/json'});
+       /// return this.http.post('https://dansgmail.herokuapp.com/mail/markAllRead' + token, body, {headers: headers})
+       ///     .map((response: Response) => {
+       ///         const result = response;
+       ///     })
+        ///    .catch((error: Response) => Observable.throw(error.json()));
     }
 
     markNotSpamHighlighted(){
