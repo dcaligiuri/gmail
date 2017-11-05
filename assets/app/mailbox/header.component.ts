@@ -54,6 +54,11 @@ export class HeaderComponent {
     }
 
 
+    checkHighlighted(){
+        console.log(this.emailService.highlightedEmails);
+    }
+
+
     refresh(): void {
         window.location.reload();
     }
