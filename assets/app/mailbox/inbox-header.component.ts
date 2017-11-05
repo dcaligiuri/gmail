@@ -20,6 +20,10 @@ export class InboxHeaderComponent {
         //this.emailService.getMessages(currTab).subscribe();
     }
 
+    clearHigh(){
+    	this.emailService.clearHighlightedEmails();
+    }
+
 	onDrop(event: any, data: any){
 		let dataTransfer = event.dataTransfer.getData('data');
 		let targetTab = event.srcElement.id;
