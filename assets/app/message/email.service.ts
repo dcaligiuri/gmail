@@ -46,6 +46,7 @@ export class EmailService {
     changeUpp(number) {
         this.upper.next(number);
     }
+
     changeLow(number) {
         this.lower.next(number);
     }

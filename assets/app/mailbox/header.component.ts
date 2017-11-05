@@ -56,10 +56,6 @@ export class HeaderComponent {
 
     checkHighlighted(){
         console.log(this.emailService.highlightedEmails);
-        console.log(this.emailService.upper.toString());
-        console.log(this.emailService.upperLimit.toString());
-        console.log(this.emailService.lower.toString());
-        console.log(this.emailService.lowerLimit.toString());
     }
 
 
@@ -132,6 +128,8 @@ export class HeaderComponent {
 
 
     highlightAll(){
+        console.log(this.emailService.lower);
+        console.log("hELLO");
         this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
