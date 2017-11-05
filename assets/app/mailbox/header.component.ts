@@ -140,6 +140,7 @@ export class HeaderComponent {
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
+                this.emailService.removeNotHighlighted(this.emailService.emails[x]);
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'true' ){
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
@@ -164,6 +165,7 @@ export class HeaderComponent {
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
+                this.emailService.removeNotHighlighted(this.emailService.emails[x]);
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'false' ){
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
@@ -175,6 +177,7 @@ export class HeaderComponent {
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
+                this.emailService.removeNotHighlighted(this.emailService.emails[x]);
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'true' ){
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
@@ -187,6 +190,7 @@ export class HeaderComponent {
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
+                this.emailService.removeNotHighlighted(this.emailService.emails[x]);
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'false' ){
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
