@@ -139,6 +139,7 @@ export class EmailService {
 
 
         if (canAdd === true){
+            email.isChecked = true;
             this.highlightedEmails.push(email);
         }
         
