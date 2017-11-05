@@ -33,11 +33,6 @@ router.post('/inbox/star', function (req, res, next) {
 
 
 
-
-
-
-
-
 router.post('/moveEmail', function (req, res, next) {
 
     var arrIdToMove = [];
