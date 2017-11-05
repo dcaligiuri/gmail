@@ -183,8 +183,8 @@ export class EmailService {
         return false; 
     }
 
-    markAllRead(){
-        console.log("HELLO");
+    //markAllRead(){
+       /// console.log("HELLO");
         // const token = localStorage.getItem('token') ?
        // '?token=' + localStorage.getItem('token')
        /// : '';
@@ -195,7 +195,7 @@ export class EmailService {
        ///         const result = response;
        ///     })
         ///    .catch((error: Response) => Observable.throw(error.json()));
-    }
+   // }
 
     markNotSpamHighlighted(){
         const token = localStorage.getItem('token')
