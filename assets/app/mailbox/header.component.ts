@@ -283,10 +283,15 @@ export class HeaderComponent {
     }
 
     markAllRead(){
-        let currTab = this.emailService.getCurrentTab();
-        this.emailService.markAllRead().subscribe();
+        for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
+            if (this.emailService.emails[x] !== undefined){
+                console.log(this.emailService.emails[x].messageId);
+            }
+        }
+        //let currTab = this.emailService.getCurrentTab();
+        //this.emailService.markAllRead().subscribe();
         //this.emailService.getMessages(currTab).subscribe();
-        this.emailService.clearHighlightedEmails();
+        //this.emailService.clearHighlightedEmails();
         
     }
 
