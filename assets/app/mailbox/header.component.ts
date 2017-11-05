@@ -127,12 +127,10 @@ export class HeaderComponent {
 
     isAllHighlighted(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
-            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].isChecked === 'false'){
-                console.log("FALSE");
+            if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].isChecked === false){
                 return false; 
             }
         }
-        console.log("TRUE");
         return true; 
     }
 
