@@ -135,7 +135,7 @@ export class HeaderComponent {
             }
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = true;
-                this.emailService.highlightedEmails.push(this.emailService.emails[x]);
+                this.emailService.highlightedEmails.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
@@ -149,7 +149,7 @@ export class HeaderComponent {
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'true' ){
                 this.emailService.emails[x].isChecked = true;
-                this.emailService.highlightedEmails.push(this.emailService.emails[x]);
+                this.emailService.highlightedEmails.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
@@ -177,7 +177,7 @@ export class HeaderComponent {
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].read === 'false' ){
                 this.emailService.emails[x].isChecked = true;
-                this.emailService.highlightedEmails.push(this.emailService.emails[x]);
+                this.emailService.highlightedEmails.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
@@ -190,7 +190,7 @@ export class HeaderComponent {
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'true' ){
                 this.emailService.emails[x].isChecked = true;
-                this.emailService.highlightedEmails.push(this.emailService.emails[x]);
+                this.emailService.highlightedEmails.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
@@ -204,7 +204,7 @@ export class HeaderComponent {
             }
             if (this.emailService.emails[x] !== undefined && this.emailService.emails[x].starred === 'false' ){
                 this.emailService.emails[x].isChecked = true;
-                this.emailService.highlightedEmails.push(this.emailService.emails[x]);
+                this.emailService.highlightedEmails.pushHighlighted(this.emailService.emails[x]);
             }
         }
     }
