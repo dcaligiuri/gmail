@@ -184,6 +184,7 @@ export class EmailService {
     }
 
     markAllRead(){
+        console.log("HELLO");
          const token = localStorage.getItem('token') ?
         '?token=' + localStorage.getItem('token')
         : '';
