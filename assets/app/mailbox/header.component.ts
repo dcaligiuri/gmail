@@ -130,7 +130,7 @@ export class HeaderComponent {
     highlightAll(){
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
-                this.emailService.emails[x].isChecked = true;
+                //this.emailService.emails[x].isChecked = true;
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
             }
         }
