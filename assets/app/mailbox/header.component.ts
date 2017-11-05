@@ -283,6 +283,7 @@ export class HeaderComponent {
     }
 
     markAllRead(){
+        console.log("YOUVE CLICKED");
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 console.log(this.emailService.emails[x].messageId);
