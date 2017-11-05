@@ -56,10 +56,10 @@ export class HeaderComponent {
 
     checkHighlighted(){
         console.log(this.emailService.highlightedEmails);
-        console.log(this.emailService.upper);
-        console.log(this.emailService.upperLimit);
-        console.log(this.emailService.lower);
-        console.log(this.emailService.lowerLimit);
+        console.log(this.emailService.upper.toString());
+        console.log(this.emailService.upperLimit.toString());
+        console.log(this.emailService.lower.toString());
+        console.log(this.emailService.lowerLimit.toString());
     }
 
 
