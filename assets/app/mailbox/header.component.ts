@@ -293,7 +293,7 @@ export class HeaderComponent {
         //this.emailService.markAllRead().subscribe();
         //this.emailService.getMessages(currTab).subscribe();
         //this.emailService.clearHighlightedEmails();
-        
+        //lallaal
     }
 
     moveTo(placeToMove: string){
