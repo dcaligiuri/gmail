@@ -128,6 +128,7 @@ export class HeaderComponent {
 
 
     highlightAll(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.pushHighlighted(this.emailService.emails[x]);
@@ -137,6 +138,7 @@ export class HeaderComponent {
 
 
     highlightRead(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
@@ -149,6 +151,7 @@ export class HeaderComponent {
 
 
     highlightNone(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
@@ -161,6 +164,7 @@ export class HeaderComponent {
 
 
     highlightUnread(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
@@ -172,6 +176,7 @@ export class HeaderComponent {
     }
 
     highlightStarred(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
@@ -184,6 +189,7 @@ export class HeaderComponent {
 
 
     highlightUnstarred(){
+        this.emailService.clearHighlightedEmails();
         for (let x = this.startInboxPos - 1; x < this.endInboxPos; x++){
             if (this.emailService.emails[x] !== undefined){
                 this.emailService.emails[x].isChecked = false;
