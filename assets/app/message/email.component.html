@@ -12,6 +12,7 @@
 	<input type="checkbox" [checked]="isChecked" (change)="triggerUpdate($event)" />
 	<button (click)="toggleStarred($event)" class="btn-link btn"><span class="glyphicon" [ngClass]="[message.starred === 'true' ? 'glyphicon-star' : 'glyphicon-star-empty']" aria-hidden="true"></span></button><a [routerLink]="message.messageId"><span class="text-left">{{message.fromEmail}}</span><span class="text-center">{{message.subject}} - {{message.content}}</span><span class="pull-right">{{modifiedDate()}}</span></a>
 	<h1>HELLLO</h1>
+	<h1>PLEASE</h1>
 </div>
 
 
